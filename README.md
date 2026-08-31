@@ -3,6 +3,8 @@
 [![CI](https://github.com/hyzhu711-oss/Hospital-queue-webgis/actions/workflows/ci.yml/badge.svg)](https://github.com/hyzhu711-oss/Hospital-queue-webgis/actions/workflows/ci.yml)
 [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/hyzhu711-oss/Hospital-queue-webgis)
 
+**Live demo:** [hospital-queue-webgis.onrender.com](https://hospital-queue-webgis.onrender.com)
+
 QueueLens is a full-stack WebGIS for crowdsourced hospital queue and cleanliness reporting. It combines a responsive Leaflet workflow for field reporting with a Cesium 3D dashboard, spatial search, report analytics and a PostgreSQL/PostGIS data model.
 
 The public demo runs with synthetic in-memory data, so it has no UCL infrastructure or credential dependency. The same API can switch to a persistent PostGIS database through one environment variable.
