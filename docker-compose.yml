@@ -1,0 +1,42 @@
+services:
+  database:
+    image: postgis/postgis:16-3.4-alpine
+    environment:
+      POSTGRES_DB: hospital_queue
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d hospital_queue"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    ports:
+      - "5432:5432"
+    volumes:
+      - hospital_queue_data:/var/lib/postgresql/data
+
+  migrate:
+    build: .
+    command: node scripts/migrate.js
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@database:5432/hospital_queue
+      DATABASE_SSL: "false"
+    depends_on:
+      database:
+        condition: service_healthy
+
+  app:
+    build: .
+    environment:
+      PORT: 3000
+      DATA_SOURCE: postgres
+      DATABASE_URL: postgresql://postgres:postgres@database:5432/hospital_queue
+      DATABASE_SSL: "false"
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    ports:
+      - "3000:3000"
+
+volumes:
+  hospital_queue_data:

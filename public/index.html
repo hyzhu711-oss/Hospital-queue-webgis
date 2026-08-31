@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Interactive WebGIS for hospital queue and cleanliness reporting">
+    <title>QueueLens | Hospital Queue WebGIS</title>
+    <link rel="preconnect" href="https://unpkg.com">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <link rel="stylesheet" href="/css/styles.css">
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="/" aria-label="QueueLens map">
+          <span class="brand-mark"><i data-lucide="map-pinned"></i></span>
+          <span><strong>QueueLens</strong><small>Hospital Queue WebGIS</small></span>
+        </a>
+        <nav class="primary-nav" aria-label="Primary navigation">
+          <a class="nav-link active" href="/"><i data-lucide="map"></i><span>Live map</span></a>
+          <a class="nav-link" href="/dashboard.html"><i data-lucide="earth"></i><span>3D dashboard</span></a>
+        </nav>
+        <div class="user-summary">
+          <span class="data-mode"><span class="status-dot"></span>Demo data</span>
+          <span class="user-name" id="userName">Portfolio visitor</span>
+          <span class="user-metric"><strong id="reportCount">0</strong> reports</span>
+          <span class="user-metric">Rank <strong id="userRank">-</strong></span>
+        </div>
+      </header>
+
+      <main class="map-workspace">
+        <aside class="control-rail" id="controlRail" aria-label="Map controls">
+          <section class="rail-section">
+            <div class="section-heading">
+              <div><span class="eyebrow">Explore</span><h1>Hospital status</h1></div>
+              <button class="icon-button" id="refreshButton" type="button" title="Refresh data" aria-label="Refresh data">
+                <i data-lucide="refresh-cw"></i>
+              </button>
+            </div>
+            <div class="segmented-control" role="group" aria-label="Hospital layer">
+              <button class="segment active" type="button" data-layer="all">All</button>
+              <button class="segment" type="button" data-layer="nearest">Nearest 5</button>
+              <button class="segment" type="button" data-layer="unknown">Unknown</button>
+            </div>
+            <button class="command-button" id="locateButton" type="button">
+              <i data-lucide="locate-fixed"></i><span>Use my location</span>
+            </button>
+          </section>
+
+          <section class="rail-section">
+            <div class="section-heading compact">
+              <div><span class="eyebrow">Distribution</span><h2>Queue overview</h2></div>
+            </div>
+            <div class="chart-wrap"><canvas id="queueSummaryChart" aria-label="Hospitals by queue length"></canvas></div>
+          </section>
+
+          <section class="rail-section legend-section">
+            <div class="section-heading compact">
+              <div><span class="eyebrow">Map key</span><h2>Reported wait</h2></div>
+            </div>
+            <div class="legend-list" id="queueLegend"></div>
+          </section>
+
+          <section class="rail-section proximity-section">
+            <label class="toggle-row" for="proximityToggle">
+              <span><strong>Nearby prompt</strong><small>Alert after five readings within 25 m</small></span>
+              <input id="proximityToggle" type="checkbox">
+              <span class="toggle" aria-hidden="true"></span>
+            </label>
+          </section>
+        </aside>
+
+        <section class="map-stage" aria-label="Hospital map">
+          <div id="map"></div>
+          <div class="map-toolbar">
+            <button class="icon-button mobile-controls-button" id="mobileControlsButton" type="button" title="Map controls" aria-label="Map controls" aria-expanded="false">
+              <i data-lucide="sliders-horizontal"></i>
+            </button>
+            <button class="primary-button" id="addHospitalButton" type="button">
+              <i data-lucide="map-pin-plus"></i><span>Add hospital</span>
+            </button>
+          </div>
+          <div class="map-instruction" id="mapInstruction" hidden>
+            <i data-lucide="mouse-pointer-click"></i><span>Select a location on the map</span>
+            <button class="icon-button inverse" id="cancelAddButton" type="button" title="Cancel" aria-label="Cancel adding hospital"><i data-lucide="x"></i></button>
+          </div>
+        </section>
+
+        <aside class="detail-panel" id="detailPanel" aria-label="Hospital details">
+          <div class="empty-state" id="emptyDetail">
+            <i data-lucide="hospital"></i>
+            <h2>Select a hospital</h2>
+            <p>Choose a marker to inspect its latest queue status and reporting history.</p>
+          </div>
+          <div id="hospitalDetail" hidden>
+            <div class="detail-header">
+              <div>
+                <span class="eyebrow">Selected hospital</span>
+                <h2 id="detailName"></h2>
+              </div>
+              <button class="icon-button" id="closeDetailButton" type="button" title="Close details" aria-label="Close hospital details"><i data-lucide="x"></i></button>
+            </div>
+            <div class="status-line">
+              <span class="status-swatch" id="detailSwatch"></span>
+              <strong id="detailQueue"></strong>
+            </div>
+            <dl class="detail-facts">
+              <div><dt>Last inspected</dt><dd id="detailInspection"></dd></div>
+              <div><dt>Latest report</dt><dd id="detailReportedAt"></dd></div>
+              <div class="wide"><dt>Cleanliness note</dt><dd id="detailCleanliness"></dd></div>
+            </dl>
+            <button class="primary-button full-width" id="reportButton" type="button">
+              <i data-lucide="clipboard-plus"></i><span>Submit queue report</span>
+            </button>
+            <div class="report-history">
+              <div class="section-heading compact">
+                <div><span class="eyebrow">Recent activity</span><h3>Report history</h3></div>
+              </div>
+              <div id="reportHistory" class="report-list"></div>
+            </div>
+          </div>
+        </aside>
+      </main>
+    </div>
+
+    <dialog id="hospitalDialog" class="modal">
+      <form method="dialog" id="hospitalForm">
+        <div class="modal-header">
+          <div><span class="eyebrow">New location</span><h2>Add a hospital</h2></div>
+          <button class="icon-button" value="cancel" type="submit" formnovalidate title="Close" aria-label="Close"><i data-lucide="x"></i></button>
+        </div>
+        <div class="form-grid">
+          <label class="wide">Hospital name<input name="name" maxlength="100" required autocomplete="off"></label>
+          <label>Last inspected<input name="lastInspected" type="date" required></label>
+          <label>Coordinates<input id="coordinateDisplay" readonly></label>
+        </div>
+        <input name="latitude" type="hidden">
+        <input name="longitude" type="hidden">
+        <div class="modal-actions">
+          <button class="secondary-button" value="cancel" type="submit" formnovalidate>Cancel</button>
+          <button class="primary-button" value="default" type="submit"><i data-lucide="plus"></i><span>Add hospital</span></button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog id="reportDialog" class="modal">
+      <form method="dialog" id="reportForm">
+        <div class="modal-header">
+          <div><span class="eyebrow">Crowdsourced update</span><h2 id="reportHospitalName">Submit report</h2></div>
+          <button class="icon-button" value="cancel" type="submit" formnovalidate title="Close" aria-label="Close"><i data-lucide="x"></i></button>
+        </div>
+        <div class="form-grid single-column">
+          <label>Current queue<select name="queueLengthId" id="queueSelect" required></select></label>
+          <label>Cleanliness observation<textarea name="cleanliness" rows="4" maxlength="500" required placeholder="Describe the waiting area and facilities"></textarea></label>
+        </div>
+        <div class="modal-actions">
+          <button class="secondary-button" value="cancel" type="submit" formnovalidate>Cancel</button>
+          <button class="primary-button" value="default" type="submit"><i data-lucide="send"></i><span>Submit report</span></button>
+        </div>
+      </form>
+    </dialog>
+
+    <div class="toast" id="toast" role="status" aria-live="polite" hidden>
+      <i data-lucide="circle-check"></i><span id="toastMessage"></span>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+    <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
+    <script src="/js/app.js"></script>
+  </body>
+</html>

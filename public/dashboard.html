@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="3D hospital reporting dashboard">
+    <title>3D Dashboard | QueueLens</title>
+    <script>window.CESIUM_BASE_URL = "https://unpkg.com/cesium@1.110.0/Build/Cesium/";</script>
+    <link rel="stylesheet" href="https://unpkg.com/cesium@1.110.0/Build/Cesium/Widgets/widgets.css">
+    <link rel="stylesheet" href="/css/styles.css">
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="/" aria-label="QueueLens map">
+          <span class="brand-mark"><i data-lucide="map-pinned"></i></span>
+          <span><strong>QueueLens</strong><small>Hospital Queue WebGIS</small></span>
+        </a>
+        <nav class="primary-nav" aria-label="Primary navigation">
+          <a class="nav-link" href="/"><i data-lucide="map"></i><span>Live map</span></a>
+          <a class="nav-link active" href="/dashboard.html"><i data-lucide="earth"></i><span>3D dashboard</span></a>
+        </nav>
+        <div class="user-summary">
+          <span class="data-mode"><span class="status-dot"></span>Demo data</span>
+          <span class="user-name" id="dashboardUserName">Portfolio visitor</span>
+          <span class="user-metric"><strong id="dashboardReportCount">0</strong> reports</span>
+        </div>
+      </header>
+
+      <main class="dashboard-workspace">
+        <section class="globe-stage" aria-label="3D hospital map">
+          <div id="cesiumContainer"></div>
+          <div class="globe-heading">
+            <span class="eyebrow">Spatial overview</span>
+            <h1>London hospital network</h1>
+            <p>Select a point to inspect its reporting history.</p>
+          </div>
+          <div class="globe-legend" id="globeLegend"></div>
+        </section>
+
+        <aside class="insight-panel" aria-label="Hospital analytics">
+          <section class="dashboard-section selector-section">
+            <label for="hospitalSelect"><span class="eyebrow">Hospital</span><strong>Selected location</strong></label>
+            <select id="hospitalSelect" aria-label="Choose a hospital"></select>
+          </section>
+
+          <section class="dashboard-section metrics-row" aria-label="Summary metrics">
+            <div><span>Total hospitals</span><strong id="totalHospitals">0</strong></div>
+            <div><span>Known queues</span><strong id="knownQueues">0</strong></div>
+            <div><span>User rank</span><strong id="dashboardRank">-</strong></div>
+          </section>
+
+          <section class="dashboard-section selected-summary">
+            <div class="section-heading compact">
+              <div><span class="eyebrow">Latest status</span><h2 id="selectedHospitalName">Choose a hospital</h2></div>
+              <span class="dashboard-status-dot" id="dashboardStatusDot"></span>
+            </div>
+            <p id="selectedHospitalStatus" class="muted-message">Hospital details will appear here.</p>
+          </section>
+
+          <section class="dashboard-section chart-section">
+            <div class="section-heading compact">
+              <div><span class="eyebrow">Text classification</span><h2>Cleanliness notes</h2></div>
+            </div>
+            <div class="dashboard-chart"><canvas id="cleanlinessChart" aria-label="Cleanliness report classification"></canvas></div>
+          </section>
+
+          <section class="dashboard-section reports-section">
+            <div class="section-heading compact">
+              <div><span class="eyebrow">Chronology</span><h2>Submitted reports</h2></div>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Date</th><th>Queue</th><th>Observation</th></tr></thead>
+                <tbody id="dashboardReportRows"><tr><td colspan="3">Select a hospital to load reports.</td></tr></tbody>
+              </table>
+            </div>
+          </section>
+        </aside>
+      </main>
+    </div>
+
+    <div class="toast" id="dashboardToast" role="status" aria-live="polite" hidden>
+      <i data-lucide="circle-alert"></i><span id="dashboardToastMessage"></span>
+    </div>
+
+    <script src="https://unpkg.com/cesium@1.110.0/Build/Cesium/Cesium.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+    <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
+    <script src="/js/dashboard.js"></script>
+  </body>
+</html>
