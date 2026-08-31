@@ -6,7 +6,8 @@ function createPool() {
   const useSsl = process.env.DATABASE_SSL === "true";
   return new Pool({
     connectionString: process.env.DATABASE_URL,
-    ssl: useSsl ? { rejectUnauthorized: false } : false
+    ssl: useSsl ? { rejectUnauthorized: false } : false,
+    options: "-c search_path=public,extensions"
   });
 }
 
@@ -41,6 +42,11 @@ function createPostgresStore() {
 
   return {
     mode: "postgres",
+
+    async healthCheck() {
+      await pool.query("SELECT 1");
+      return { status: "ok", dataSource: "postgres" };
+    },
 
     async getUser(userId) {
       const result = await pool.query(

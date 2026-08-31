@@ -1,4 +1,6 @@
-CREATE EXTENSION IF NOT EXISTS postgis;
+CREATE SCHEMA IF NOT EXISTS extensions;
+CREATE EXTENSION IF NOT EXISTS postgis WITH SCHEMA extensions;
+SET search_path TO public, extensions;
 
 CREATE TABLE IF NOT EXISTS users (
   id SERIAL PRIMARY KEY,

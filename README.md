@@ -1,5 +1,7 @@
 # QueueLens: Hospital Queue WebGIS
 
+**English** | [简体中文](README.zh-CN.md)
+
 [![CI](https://github.com/hyzhu711-oss/Hospital-queue-webgis/actions/workflows/ci.yml/badge.svg)](https://github.com/hyzhu711-oss/Hospital-queue-webgis/actions/workflows/ci.yml)
 [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/hyzhu711-oss/Hospital-queue-webgis)
 
@@ -7,7 +9,7 @@
 
 QueueLens is a full-stack WebGIS for crowdsourced hospital queue and cleanliness reporting. It combines a responsive Leaflet workflow for field reporting with a Cesium 3D dashboard, spatial search, report analytics and a PostgreSQL/PostGIS data model.
 
-The public demo runs with synthetic in-memory data, so it has no UCL infrastructure or credential dependency. The same API can switch to a persistent PostGIS database through one environment variable.
+The public demo uses synthetic data stored persistently in Supabase PostgreSQL/PostGIS, with no UCL infrastructure or credential dependency. Local development can still use the zero-configuration in-memory repository.
 
 ![QueueLens interactive map](docs/screenshots/map.png)
 
@@ -31,8 +33,8 @@ flowchart LR
   A[Leaflet field map] --> C[Express API]
   B[Cesium 3D dashboard] --> C
   C --> D{Data source}
-  D -->|Default demo| E[In-memory repository]
-  D -->|Production| F[(PostgreSQL + PostGIS)]
+  D -->|Local default| E[In-memory repository]
+  D -->|Public deployment| F[(Supabase PostgreSQL + PostGIS)]
   F --> G[Spatial index and reporting views]
 ```
 
@@ -108,7 +110,7 @@ The test suite exercises GeoJSON responses, spatial ordering, validation, report
 
 ## Deployment
 
-`render.yaml` deploys a public, zero-configuration demonstration using synthetic memory data. For persistent deployment, provision a PostGIS-compatible PostgreSQL database, run `npm run migrate`, and set:
+`render.yaml` deploys the public application on Render and runs the idempotent migrations before starting the server. Its persistent data is provided by Supabase PostgreSQL/PostGIS. Set the following values in the deployment environment:
 
 ```text
 DATA_SOURCE=postgres
@@ -117,6 +119,8 @@ DATABASE_SSL=true
 ```
 
 No credentials are committed to the repository. `.env` files are ignored and only `.env.example` is versioned.
+
+Render's free web service may sleep after a period without traffic, so the first request can take a short time while the service wakes up.
 
 ## Data and Coursework Note
 

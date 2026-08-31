@@ -47,9 +47,9 @@ function requireNonBlank(value, label) {
 function createApiRouter(store, demoUserId) {
   const router = express.Router();
 
-  router.get("/health", (req, res) => {
-    res.json({ status: "ok", dataSource: store.mode });
-  });
+  router.get("/health", asyncRoute(async (req, res) => {
+    res.json(await store.healthCheck());
+  }));
 
   router.get("/user", asyncRoute(async (req, res) => {
     const userId = parsePositiveInteger(req.query.userId, demoUserId);

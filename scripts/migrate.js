@@ -13,7 +13,8 @@ async function migrate() {
 
   const client = new Client({
     connectionString: process.env.DATABASE_URL,
-    ssl: process.env.DATABASE_SSL === "true" ? { rejectUnauthorized: false } : false
+    ssl: process.env.DATABASE_SSL === "true" ? { rejectUnauthorized: false } : false,
+    options: "-c search_path=public,extensions"
   });
   const migrationDirectory = path.join(__dirname, "..", "database", "migrations");
   const files = fs.readdirSync(migrationDirectory).filter((file) => file.endsWith(".sql")).sort();

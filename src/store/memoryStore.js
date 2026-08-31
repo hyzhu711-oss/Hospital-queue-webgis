@@ -38,6 +38,10 @@ function createMemoryStore() {
   return {
     mode: "memory",
 
+    async healthCheck() {
+      return { status: "ok", dataSource: "memory" };
+    },
+
     async getUser(userId) {
       return copy(users.find((user) => Number(user.id) === Number(userId)) || users[0]);
     },
