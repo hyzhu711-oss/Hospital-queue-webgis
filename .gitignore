@@ -7,3 +7,10 @@ npm-debug.log*
 .DS_Store
 Thumbs.db
 docs/screenshots/*.tmp.png
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.tools/
+agent-service/.env
+eval/reports/run-*.json

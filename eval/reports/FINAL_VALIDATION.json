@@ -1,0 +1,18 @@
+{
+  "date": "2026-10-07",
+  "timezone": "Asia/Shanghai",
+  "environment": {"os": "Windows", "node": "24.19.0", "python": "3.12.10", "postgres": "16.15", "postgis": "3.6.2"},
+  "tests": {
+    "node_jest": {"passed": 59, "suites": 6, "skipped": 0, "command": "npm test", "actual_local_wrapper": "node .tools/verify-db.js"},
+    "agent_mcp": {"passed": 31, "skipped": 0, "command": "python -m pytest tests -q", "cwd": "agent-service"},
+    "evaluation": {"passed": 28, "skipped": 0, "command": "python -m pytest eval/tests -q", "actual_local_wrapper": "python .tools/test-eval.py"},
+    "total": 118
+  },
+  "migrations": {"fresh": "passed", "repeated": "passed", "legacy_preserves_custom_data": "passed", "temporary_databases_removed": true},
+  "regression": {"report": "regression-final.json", "proposed_rules": "120/120", "single_step_rules": "50/120", "scope_zh": "已见模板的确定性软件回归，不是模型推理准确率"},
+  "real_model": {"model": "deepseek-flash", "validation_rows": 720, "formal_test_rows": 2160, "test_repeats": 3, "all_failures_retained": true},
+  "static_checks": {"python_ast_files": 41, "javascript_syntax_files": 26, "dependency_locks": "passed", "documentation_links": "passed", "yaml_files_parsed": 3, "git_diff_check": "passed", "scope_zh": "静态检查不代表Docker或远程CI实际执行"},
+  "unrun": ["Docker build/Compose", "Linux compatibility", "remote GitHub Actions", "production deployment", "production database migration", "live hospital validation"],
+  "no_push": true,
+  "production_database_unchanged": true
+}

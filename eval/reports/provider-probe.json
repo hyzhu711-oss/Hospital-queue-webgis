@@ -1,0 +1,26 @@
+{
+  "stage": "provider compatibility probe",
+  "status": {
+    "connected": true,
+    "model": "deepseek-flash",
+    "plan_intent": "nearest",
+    "usage_detected": true
+  },
+  "calls": [
+    {
+      "attempt": 1,
+      "model": "deepseek-flash",
+      "status": "ok",
+      "usage": {
+        "prompt_tokens": 793,
+        "completion_tokens": 8,
+        "total_tokens": 801
+      },
+      "http_status": 200,
+      "response_model": "deepseek-flash",
+      "finish_reason": "stop",
+      "content": "{\"intent\": \"nearest\"}",
+      "latency_ms": 1326.4872999861836
+    }
+  ]
+}

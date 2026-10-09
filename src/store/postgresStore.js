@@ -7,7 +7,7 @@ function createPool() {
   return new Pool({
     connectionString: process.env.DATABASE_URL,
     ssl: useSsl ? { rejectUnauthorized: false } : false,
-    options: "-c search_path=public,extensions"
+    options: "-c search_path=public,extensions -c statement_timeout=5000"
   });
 }
 
@@ -28,17 +28,31 @@ function mapHospital(row) {
   };
 }
 
-function createPostgresStore() {
-  if (!process.env.DATABASE_URL) {
+function createPostgresStore({ pool: suppliedPool } = {}) {
+  if (!suppliedPool && !process.env.DATABASE_URL) {
     throw new Error("DATABASE_URL is required when DATA_SOURCE=postgres");
   }
 
-  const pool = createPool();
+  const pool = suppliedPool || createPool();
   const hospitalSelect = `
     SELECT id, name, last_inspected, user_id, queue_length_id,
       queue_description, queue_colour, cleanliness, latest_report_at,
       ST_X(location) AS longitude, ST_Y(location) AS latitude
     FROM hospital_latest_status`;
+  const toolHospitalSelect = `SELECT h.id,h.name,h.user_id,h.last_inspected,
+    ST_X(h.location) AS longitude,ST_Y(h.location) AS latitude,
+    r.id AS latest_report_id,r.created_at AS latest_report_at,r.cleanliness,
+    r.cleanliness_score,r.queue_wait_minutes,q.id AS queue_length_id,
+    COALESCE(q.description,'Unknown') AS queue_description,COALESCE(q.colour,'#6b7280') AS queue_colour,
+    CASE WHEN $2::double precision IS NULL THEN NULL ELSE
+      ST_Distance(h.location::geography,ST_SetSRID(ST_MakePoint($2,$3),4326)::geography) END AS distance_metres_raw
+    FROM hospitals h LEFT JOIN LATERAL
+      (SELECT * FROM reports WHERE hospital_id=h.id ORDER BY created_at DESC,id DESC LIMIT 1) r ON TRUE
+    LEFT JOIN queue_lengths q ON q.id=r.queue_length_id`;
+  const toolMap = (row) => ({...mapHospital(row),latestReportId:row.latest_report_id,
+    cleanlinessScore:row.cleanliness_score==null?null:Number(row.cleanliness_score),
+    queueWaitMinutes:row.queue_wait_minutes==null?null:Number(row.queue_wait_minutes),
+    distanceMetresRaw:row.distance_metres_raw==null?null:Number(row.distance_metres_raw)});
 
   return {
     mode: "postgres",
@@ -178,12 +192,12 @@ function createPostgresStore() {
         [input.hospitalId]
       );
       const result = await pool.query(
-        `INSERT INTO reports (hospital_id, user_id, queue_length_id, cleanliness)
-         VALUES ($1, $2, $3, $4)
+          `INSERT INTO reports (hospital_id, user_id, queue_length_id, cleanliness, cleanliness_score, queue_wait_minutes)
+         VALUES ($1, $2, $3, $4, $5, $6)
          RETURNING id, hospital_id AS "hospitalId", user_id AS "userId",
            queue_length_id AS "queueLengthId", cleanliness,
            created_at AS "createdAt"`,
-        [input.hospitalId, input.userId, input.queueLengthId, input.cleanliness]
+        [input.hospitalId, input.userId, input.queueLengthId, input.cleanliness, input.cleanlinessScore ?? null, input.queueWaitMinutes ?? null]
       );
       const queueResult = await pool.query(
         "SELECT description, colour FROM queue_lengths WHERE id = $1",
@@ -200,6 +214,58 @@ function createPostgresStore() {
       };
     },
 
+    async toolReadSnapshot(callback) {
+      const client = await pool.connect();
+      try {
+        await client.query("BEGIN ISOLATION LEVEL REPEATABLE READ READ ONLY");
+        const result = await callback(createPostgresStore({pool:client}));
+        await client.query("COMMIT");
+        return result;
+      } catch (error) { await client.query("ROLLBACK"); throw error; }
+      finally { client.release(); }
+    },
+    async toolResolveHospitals(query) {
+      const result = await pool.query(`${toolHospitalSelect}
+        WHERE lower(h.name)=lower($1) OR (strpos(lower(h.name),lower($1))>0
+          AND NOT EXISTS(SELECT 1 FROM hospitals WHERE lower(name)=lower($1))) ORDER BY h.id LIMIT 201`,[query,null,null]);
+      return result.rows.map(toolMap);
+    },
+    async toolGetHospitals(ids, origin) {
+      const result=await pool.query(`${toolHospitalSelect} WHERE h.id=ANY($1::int[]) ORDER BY h.id`,[ids,origin?.longitude??null,origin?.latitude??null]);
+      return result.rows.map(toolMap);
+    },
+    async toolSearchHospitals(input) {
+      const result=await pool.query(`${toolHospitalSelect}
+        WHERE ($1::double precision IS NULL OR ST_DWithin(h.location::geography,
+          ST_SetSRID(ST_MakePoint($2,$3),4326)::geography,$1))
+        ORDER BY distance_metres_raw,h.id LIMIT $4`,[input.radius_m??null,input.longitude,input.latitude,input.limit]);
+      return result.rows.map(toolMap);
+    },
+    async toolGetReports(ids,start,end,limit) {
+      const result=await pool.query(`SELECT id,hospital_id AS "hospitalId",user_id AS "userId",
+        queue_length_id AS "queueLengthId",cleanliness,cleanliness_score AS "cleanlinessScore",
+        queue_wait_minutes AS "queueWaitMinutes",created_at AS "createdAt"
+        FROM reports WHERE hospital_id=ANY($1::int[]) AND created_at >= $2::timestamptz AND created_at < $3::timestamptz
+        ORDER BY created_at DESC,id DESC LIMIT $4`,[ids,start,end,limit]);
+      return result.rows.map((r)=>({...r,createdAt:new Date(r.createdAt).toISOString(),cleanlinessScore:r.cleanlinessScore==null?null:Number(r.cleanlinessScore),queueWaitMinutes:r.queueWaitMinutes==null?null:Number(r.queueWaitMinutes)}));
+    },
+    async toolStatistics(ids,start,end) {
+      const result=await pool.query(`SELECT h.id AS hospital_id,COUNT(r.id)::int AS report_count,
+        COUNT(r.id) FILTER(WHERE q.sort_order>0)::int AS known_queue_count,
+        AVG(q.sort_order) FILTER(WHERE q.sort_order>0) AS average_queue_severity,
+        COUNT(r.queue_wait_minutes)::int AS observed_wait_count,AVG(r.queue_wait_minutes) AS average_wait_minutes,
+        COUNT(r.cleanliness_score)::int AS cleanliness_count,AVG(r.cleanliness_score) AS average_cleanliness,
+        MIN(r.cleanliness_score) AS min_cleanliness,MAX(r.cleanliness_score) AS max_cleanliness,
+        MIN(r.created_at) AS first_report_at,MAX(r.created_at) AS last_report_at,
+        (array_agg(NULLIF(q.sort_order,0) ORDER BY r.created_at,r.id))[1] AS first_queue_severity,
+        (array_agg(NULLIF(q.sort_order,0) ORDER BY r.created_at DESC,r.id DESC))[1] AS last_queue_severity,
+        (array_agg(r.id ORDER BY r.created_at,r.id) FILTER(WHERE r.id IS NOT NULL))[1:200] AS report_ids,
+        COUNT(r.id)<=200 AS report_ids_complete
+        FROM hospitals h LEFT JOIN reports r ON r.hospital_id=h.id AND r.created_at >= $2::timestamptz AND r.created_at < $3::timestamptz
+        LEFT JOIN queue_lengths q ON q.id=r.queue_length_id WHERE h.id=ANY($1::int[]) GROUP BY h.id ORDER BY h.id`,[ids,start,end]);
+      const numeric=["average_queue_severity","average_wait_minutes","average_cleanliness","min_cleanliness","max_cleanliness"];
+      return result.rows.map((r)=>{for(const key of numeric)r[key]=r[key]==null?null:Number(r[key]); for(const key of ["first_report_at","last_report_at"])r[key]=r[key]?new Date(r[key]).toISOString():null;r.report_ids=r.report_ids||[];return r;});
+    },
     async close() {
       await pool.end();
     }

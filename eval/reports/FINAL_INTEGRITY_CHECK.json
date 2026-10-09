@@ -1,0 +1,16 @@
+{
+  "recorded_at": "2026-10-07T12:04:14.311680+00:00",
+  "checks": {
+    "implementation_unchanged": true,
+    "test_unchanged": true,
+    "ground_truth_unchanged": true,
+    "fixture_unchanged": true,
+    "database_snapshot_unchanged": true,
+    "both_env_files_ignored": true,
+    "key_absent_from_all_nonignored_files": true
+  },
+  "scanned_nonignored_files": 157,
+  "secret_match_count": 0,
+  "implementation_sha256": "007132b4161bbbb8f08b72b8c7e638cfae2f8d1e6177f0a0bddea18c323e318b",
+  "test_sha256": "95fc064b1faea4afb125daec0e5844ff5b63a52385b1850b3449582010a61ea5"
+}

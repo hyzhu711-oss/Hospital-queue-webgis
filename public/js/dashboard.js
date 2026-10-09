@@ -5,6 +5,7 @@ const dashboardState = {
   viewer: null,
   features: [],
   entityByHospitalId: new Map(),
+  queueColours: new Map(),
   chart: null
 };
 
@@ -232,6 +233,7 @@ async function initialiseDashboard() {
       dashboardApi(`/api/users/${dashboardState.userId}/activity`)
     ]);
     dashboardState.features = hospitals.features || [];
+    dashboardState.queueColours=new Map(summary.map(q=>[q.description,q.colour]));
     dashboardElements.dashboardUserName.textContent = user.name;
     dashboardElements.dashboardReportCount.textContent = activity.reportCount;
     dashboardElements.dashboardRank.textContent = activity.rank;
@@ -247,9 +249,24 @@ async function initialiseDashboard() {
     if (dashboardState.features.length) {
       await selectDashboardHospital(dashboardState.features[0].properties.id, false);
     }
+    if(window.QueueLensAgentUI)await window.QueueLensAgentUI.initialise({host:document.getElementById("agentPanel"),adapter:cesiumAgentAdapter(),getLocation:()=>null});
   } catch (error) {
     showDashboardError(`Unable to initialise dashboard: ${error.message}`);
   }
 }
 
 document.addEventListener("DOMContentLoaded", initialiseDashboard);
+
+function cesiumAgentAdapter(){
+  const viewer=dashboardState.viewer;
+  return {
+    prepare(entities){for(const h of entities){const old=dashboardState.features.find(f=>f.properties.id===h.hospital_id);const colour=dashboardState.queueColours.get(h.queue_description)||"#087f72";if(!old){const feature={type:"Feature",geometry:{type:"Point",coordinates:[h.longitude,h.latitude]},properties:{id:h.hospital_id,name:h.name,queueDescription:h.queue_description,cleanliness:h.cleanliness_note,queueColour:colour}};dashboardState.features.push(feature);const entity=viewer.entities.add({name:h.name,position:Cesium.Cartesian3.fromDegrees(h.longitude,h.latitude,40),point:{pixelSize:13,color:Cesium.Color.fromCssColorString(colour),outlineColor:Cesium.Color.WHITE,outlineWidth:3},label:{text:h.name,font:"12px sans-serif"},properties:{hospitalId:h.hospital_id}});dashboardState.entityByHospitalId.set(h.hospital_id,entity);const option=document.createElement("option");option.value=h.hospital_id;option.textContent=h.name;dashboardElements.hospitalSelect.append(option);}else{old.geometry.coordinates=[h.longitude,h.latitude];Object.assign(old.properties,{name:h.name,queueDescription:h.queue_description,cleanliness:h.cleanliness_note,queueColour:colour});const entity=dashboardState.entityByHospitalId.get(h.hospital_id);entity.show=true;entity.position=Cesium.Cartesian3.fromDegrees(h.longitude,h.latitude,40);entity.point.color=Cesium.Color.fromCssColorString(colour);}}},
+    filter(ids){for(const[id,entity]of dashboardState.entityByHospitalId)entity.show=ids.includes(id);},
+    fit_bounds(ids){return viewer.flyTo(ids.map(id=>dashboardState.entityByHospitalId.get(id)),{duration:0.6});},
+    highlight(ids){for(const[id,entity]of dashboardState.entityByHospitalId){entity.point.outlineColor=ids.includes(id)?Cesium.Color.CYAN:Cesium.Color.WHITE;entity.point.pixelSize=ids.includes(id)?17:13;}},
+    rank(ids){for(const[id,entity]of dashboardState.entityByHospitalId){const index=ids.indexOf(id);entity.label.text=(index>=0?`${index+1}. `:"")+entity.name;}},
+    compare(ids){this.highlight(ids);},
+    fly_to(id){const f=dashboardState.features.find(f=>f.properties.id===id);viewer.camera.flyTo({destination:Cesium.Cartesian3.fromDegrees(...f.geometry.coordinates,2200),duration:0.8});},
+    open_popup(id){return selectDashboardHospital(id,false);}
+  };
+}

@@ -1,0 +1,6 @@
+{
+  "first_formal_evaluation_started_at": "2026-10-07T19:32:01.530836+08:00",
+  "first_run_id": "test-frozen-r1-r3",
+  "implementation_sha256": "007132b4161bbbb8f08b72b8c7e638cfae2f8d1e6177f0a0bddea18c323e318b",
+  "policy_zh": "不根据此 test 的结果调整后重用为 unseen；预先计划的相同冻结实现重复推理允许。"
+}

@@ -13,6 +13,15 @@
   --topbar-height: 68px;
 }
 
+.agent-panel label { display: grid; gap: 8px; font-weight: 700; }
+.agent-panel textarea { width: 100%; margin-bottom: 8px; resize: vertical; padding: 9px; border: 1px solid var(--line); border-radius: 5px; }
+.agent-panel p { font-size: 12px; line-height: 1.5; }
+.agent-answer { white-space: pre-wrap; overflow-wrap: anywhere; }
+.agent-panel pre { max-height: 280px; overflow: auto; font-size: 10px; }
+.agent-highlight { outline: 3px solid #0e7490; outline-offset: 2px; }
+.agent-ranked { color: white; font-weight: 800; transform: none; border-radius: 50%; }
+.agent-ranked::after { display: none; }
+
 * { box-sizing: border-box; }
 [hidden] { display: none !important; }
 

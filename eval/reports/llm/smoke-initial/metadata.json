@@ -1,0 +1,38 @@
+{
+  "benchmark_version": "development-smoke",
+  "split": "smoke",
+  "case_count": 16,
+  "category_counts": {
+    "lookup": 2,
+    "nearest": 1,
+    "radius": 1,
+    "attribute_filter": 1,
+    "spatial_attribute": 1,
+    "temporal": 2,
+    "ranking": 1,
+    "comparison": 1,
+    "multi_step": 2,
+    "follow_up": 2,
+    "no_result": 1,
+    "invalid_input": 1
+  },
+  "model": "deepseek-flash",
+  "temperature": 0,
+  "thinking": "disabled",
+  "max_tokens": 4096,
+  "benchmark_sha256": "e1ce534989656c88e2720372a4ddb40e6dba74864c0ce768c04632bb705b42de",
+  "fixture_sha256": "6ffd1b4737e2f2d6258d161e07a3f8fe7c83a1925baca491fdc5b3ffac7f3b88",
+  "implementation_sha256": "4010aa1751f9a0353f89d0d513688bc32af6bc7fcaf860f7cafb7e277d73ac06",
+  "reference_clock": "2026-06-01T12:00:00Z",
+  "database_version": {
+    "postgres": "16.15",
+    "postgis": "3.6.2"
+  },
+  "repeats": 1,
+  "concurrency": 4,
+  "shuffle_seed": 20261007,
+  "max_request_seconds": 30,
+  "max_transient_retries": 1,
+  "cost": null,
+  "created_at": "2026-10-07T19:01:42.359125+08:00"
+}

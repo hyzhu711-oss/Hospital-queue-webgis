@@ -1,0 +1,45 @@
+{
+  "version": "2.0.0",
+  "seed": 20261007,
+  "reference_clock": "2026-06-01T12:00:00Z",
+  "counts": {
+    "dev": 120,
+    "validation": 60,
+    "test": 180
+  },
+  "category_counts": {
+    "validation": {
+      "lookup": 4,
+      "nearest": 4,
+      "radius": 4,
+      "attribute_filter": 4,
+      "spatial_attribute": 4,
+      "temporal": 4,
+      "ranking": 4,
+      "comparison": 4,
+      "multi_step": 8,
+      "follow_up": 8,
+      "ambiguous": 4,
+      "no_result": 4,
+      "invalid_input": 2,
+      "adversarial": 2
+    },
+    "test": {
+      "lookup": 8,
+      "nearest": 8,
+      "radius": 8,
+      "attribute_filter": 10,
+      "spatial_attribute": 12,
+      "temporal": 12,
+      "ranking": 12,
+      "comparison": 12,
+      "multi_step": 30,
+      "follow_up": 24,
+      "ambiguous": 14,
+      "no_result": 12,
+      "invalid_input": 10,
+      "adversarial": 8
+    }
+  },
+  "status": "validation_development; test not evaluated or frozen yet"
+}

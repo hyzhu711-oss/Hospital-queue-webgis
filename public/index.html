@@ -68,6 +68,7 @@
               <span class="toggle" aria-hidden="true"></span>
             </label>
           </section>
+          <section class="rail-section agent-panel" id="agentPanel" aria-label="QueueLens spatial agent" hidden></section>
         </aside>
 
         <section class="map-stage" aria-label="Hospital map">
@@ -152,6 +153,8 @@
         <div class="form-grid single-column">
           <label>Current queue<select name="queueLengthId" id="queueSelect" required></select></label>
           <label>Cleanliness observation<textarea name="cleanliness" rows="4" maxlength="500" required placeholder="Describe the waiting area and facilities"></textarea></label>
+          <label>Cleanliness score (optional, 1–5)<input name="cleanlinessScore" type="number" min="1" max="5" step="0.5" placeholder="Only rate what you observed" /></label>
+          <label>Observed wait in minutes (optional)<input name="queueWaitMinutes" type="number" min="0" max="1440" step="1" placeholder="Enter an observed duration" /></label>
         </div>
         <div class="modal-actions">
           <button class="secondary-button" value="cancel" type="submit" formnovalidate>Cancel</button>
@@ -167,6 +170,8 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
     <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
+    <script src="/js/map-actions.js"></script>
+    <script src="/js/agent-ui.js"></script>
     <script src="/js/app.js"></script>
   </body>
 </html>

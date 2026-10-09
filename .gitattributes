@@ -1,0 +1,15 @@
+# 保留冻结实现与实验文件的原始字节，避免跨平台换行转换改变SHA-256。
+[attr]frozen-bytes -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+agent-service/app/** frozen-bytes
+src/tools/** frozen-bytes
+src/domain/** frozen-bytes
+src/store/** frozen-bytes
+eval/baselines/** frozen-bytes
+eval/oracle.py frozen-bytes
+eval/metrics.py frozen-bytes
+eval/contracts.py frozen-bytes
+eval/llm_metrics.py frozen-bytes
+eval/llm_experiment.py frozen-bytes
+eval/benchmark/** frozen-bytes
+eval/benchmark_v2/** frozen-bytes
+eval/reports/** frozen-bytes

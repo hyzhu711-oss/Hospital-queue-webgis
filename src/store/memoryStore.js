@@ -2,23 +2,24 @@
 
 const demoData = require("../data/demoData");
 const { distanceInMetres } = require("../utils/geo");
+const { statistics } = require("../domain/statistics");
 
 function copy(value) {
   return JSON.parse(JSON.stringify(value));
 }
 
-function createMemoryStore() {
-  const users = copy(demoData.users);
-  const queueLengths = copy(demoData.queueLengths);
-  const hospitals = copy(demoData.hospitals);
-  const reports = copy(demoData.reports);
+function createMemoryStore(seed = demoData) {
+  const users = copy(seed.users);
+  const queueLengths = copy(seed.queueLengths);
+  const hospitals = copy(seed.hospitals);
+  const reports = copy(seed.reports);
 
   const queueById = () => new Map(queueLengths.map((item) => [Number(item.id), item]));
 
   function latestReportForHospital(hospitalId) {
     return reports
       .filter((report) => Number(report.hospitalId) === Number(hospitalId))
-      .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))[0];
+      .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt) || b.id - a.id)[0];
   }
 
   function enrichHospital(hospital) {
@@ -31,7 +32,10 @@ function createMemoryStore() {
       queueDescription: queue.description,
       queueColour: queue.colour,
       cleanliness: latest?.cleanliness || "No report yet",
-      latestReportAt: latest?.createdAt || null
+      latestReportAt: latest?.createdAt || null,
+      latestReportId: latest?.id ?? null,
+      cleanlinessScore: latest?.cleanlinessScore ?? null,
+      queueWaitMinutes: latest?.queueWaitMinutes ?? null
     };
   }
 
@@ -43,7 +47,7 @@ function createMemoryStore() {
     },
 
     async getUser(userId) {
-      return copy(users.find((user) => Number(user.id) === Number(userId)) || users[0]);
+      return copy(users.find((user) => Number(user.id) === Number(userId)) || null);
     },
 
     async listQueueLengths() {
@@ -88,7 +92,7 @@ function createMemoryStore() {
       const queueMap = queueById();
       return reports
         .filter((report) => Number(report.hospitalId) === Number(hospitalId))
-        .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+        .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt) || b.id - a.id)
         .map((report) => {
           const queue = queueMap.get(Number(report.queueLengthId));
           const user = users.find((item) => Number(item.id) === Number(report.userId));
@@ -109,7 +113,7 @@ function createMemoryStore() {
         }))
         .sort((a, b) => b.count - a.count);
       const userCount = counts.find((item) => Number(item.userId) === Number(userId))?.count || 0;
-      const rank = counts.findIndex((item) => Number(item.userId) === Number(userId)) + 1;
+      const rank = counts.filter((item) => item.count > userCount).length + 1;
 
       return { reportCount: userCount, rank: rank || counts.length + 1 };
     },
@@ -160,6 +164,8 @@ function createMemoryStore() {
         userId: Number(input.userId),
         queueLengthId: queue.id,
         cleanliness: input.cleanliness,
+        cleanlinessScore: input.cleanlinessScore ?? null,
+        queueWaitMinutes: input.queueWaitMinutes ?? null,
         createdAt: new Date().toISOString()
       };
       reports.push(report);
@@ -174,6 +180,26 @@ function createMemoryStore() {
       };
     },
 
+    async toolReadSnapshot(callback) {
+      return callback(createMemoryStore({ users, queueLengths, hospitals, reports }));
+    },
+    async toolResolveHospitals(query) {
+      const exact = hospitals.filter((h) => h.name.toLowerCase() === query.toLowerCase());
+      return (exact.length ? exact : hospitals.filter((h) => h.name.toLowerCase().includes(query.toLowerCase()))).sort((a,b) => a.id-b.id).slice(0,201).map(enrichHospital);
+    },
+    async toolGetHospitals(ids, origin) {
+      return hospitals.filter((h) => ids.includes(h.id)).sort((a,b)=>a.id-b.id).map(enrichHospital).map((h)=>({ ...h, distanceMetresRaw: origin ? distanceInMetres(origin.latitude, origin.longitude, h.latitude, h.longitude) : null }));
+    },
+    async toolSearchHospitals(input) {
+      const rows = await this.toolGetHospitals(hospitals.map((h)=>h.id), input);
+      return rows.filter((h)=>input.radius_m === undefined || h.distanceMetresRaw <= input.radius_m).sort((a,b)=>a.distanceMetresRaw-b.distanceMetresRaw || a.id-b.id).slice(0,input.limit);
+    },
+    async toolGetReports(ids, start, end, limit) {
+      return copy(reports.filter((r)=>ids.includes(r.hospitalId) && Date.parse(r.createdAt)>=Date.parse(start) && Date.parse(r.createdAt)<Date.parse(end)).sort((a,b)=>Date.parse(b.createdAt)-Date.parse(a.createdAt)||b.id-a.id).slice(0,limit));
+    },
+    async toolStatistics(ids, start, end) {
+      return ids.map((id)=>statistics(id,reports.filter((r)=>r.hospitalId===id && Date.parse(r.createdAt)>=Date.parse(start)&&Date.parse(r.createdAt)<Date.parse(end)),queueLengths));
+    },
     async close() {}
   };
 }

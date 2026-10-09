@@ -2,7 +2,7 @@
   "name": "hospital-queue-webgis",
   "version": "1.0.0",
   "private": true,
-  "description": "A portfolio-ready WebGIS for crowdsourced hospital queue and cleanliness reporting.",
+  "description": "QueueLens Agent: a tool-augmented spatial AI system over existing WebGIS and PostGIS.",
   "main": "src/server.js",
   "type": "commonjs",
   "engines": {
@@ -16,6 +16,7 @@
     "test:coverage": "jest --coverage --runInBand"
   },
   "dependencies": {
+    "ajv": "^8.17.1",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "helmet": "^8.0.0",

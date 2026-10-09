@@ -39,6 +39,7 @@
         </section>
 
         <aside class="insight-panel" aria-label="Hospital analytics">
+          <section class="dashboard-section agent-panel" id="agentPanel" aria-label="QueueLens spatial agent" hidden></section>
           <section class="dashboard-section selector-section">
             <label for="hospitalSelect"><span class="eyebrow">Hospital</span><strong>Selected location</strong></label>
             <select id="hospitalSelect" aria-label="Choose a hospital"></select>
@@ -87,6 +88,8 @@
     <script src="https://unpkg.com/cesium@1.110.0/Build/Cesium/Cesium.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
     <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
+    <script src="/js/map-actions.js"></script>
+    <script src="/js/agent-ui.js"></script>
     <script src="/js/dashboard.js"></script>
   </body>
 </html>

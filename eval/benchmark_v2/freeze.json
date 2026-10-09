@@ -1,0 +1,42 @@
+{
+  "benchmark_version": "2.0.0",
+  "status": "frozen_unexposed",
+  "case_count": 180,
+  "category_distribution": {
+    "lookup": 8,
+    "nearest": 8,
+    "radius": 8,
+    "attribute_filter": 10,
+    "spatial_attribute": 12,
+    "temporal": 12,
+    "ranking": 12,
+    "comparison": 12,
+    "multi_step": 30,
+    "follow_up": 24,
+    "ambiguous": 14,
+    "no_result": 12,
+    "invalid_input": 10,
+    "adversarial": 8
+  },
+  "expected_outcomes": {
+    "ok": 112,
+    "no_result": 34,
+    "reference_resolution_failure": 6,
+    "ambiguous": 14,
+    "invalid_input": 10,
+    "unsupported": 4
+  },
+  "test_sha256": "95fc064b1faea4afb125daec0e5844ff5b63a52385b1850b3449582010a61ea5",
+  "test_canonical_sha256": "f11ad6e1e7aad387345749bb14090274dcedeb8b9988535bf71c94e257e4c9b5",
+  "ground_truth_sha256": "1af67b3de6ba1bc28e91e31d3db94f94637d8ca340e748cb7f742a1c1ec3d986",
+  "validation_sha256": "f7ee978974e5527d533210c0b29df41f69f88829fd531ce5790ba87cea230d38",
+  "fixture_sha256": "6ffd1b4737e2f2d6258d161e07a3f8fe7c83a1925baca491fdc5b3ffac7f3b88",
+  "database_snapshot_sha256": "78ad896d62cb4f31f8d5a5545e4cb40c43368d73d523e72fe01da38de9a4194f",
+  "reference_clock": "2026-06-01T12:00:00Z",
+  "generation_seed": 20261007,
+  "git_base_commit": "72952e94992a70d97130bda18afb656043709328",
+  "working_tree_identifier": "007132b4161bbbb8f08b72b8c7e638cfae2f8d1e6177f0a0bddea18c323e318b",
+  "implementation_sha256": "007132b4161bbbb8f08b72b8c7e638cfae2f8d1e6177f0a0bddea18c323e318b",
+  "freeze_timestamp": "2026-10-07T19:30:46.275531+08:00",
+  "policy": "First formal test inference exposes the holdout. Do not tune and reuse it as unseen; create a new version if system changes are needed."
+}

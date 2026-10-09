@@ -13,7 +13,10 @@ const state = {
   summaryChart: null,
   watchId: null,
   proximitySamples: [],
-  toastTimer: null
+  toastTimer: null,
+  currentLocation: null,
+  locationAt: 0,
+  markerByHospitalId: new Map()
 };
 
 const elements = {};
@@ -69,6 +72,7 @@ function markerIcon(colour) {
 function renderHospitals(featureCollection, { fit = false } = {}) {
   state.visibleFeatures = featureCollection.features || [];
   state.hospitalLayer.clearLayers();
+  state.markerByHospitalId.clear();
   const bounds = [];
 
   state.visibleFeatures.forEach((feature) => {
@@ -79,6 +83,7 @@ function renderHospitals(featureCollection, { fit = false } = {}) {
     });
     marker.on("click", () => selectHospital(feature));
     marker.addTo(state.hospitalLayer);
+    state.markerByHospitalId.set(feature.properties.id, marker);
     bounds.push([latitude, longitude]);
   });
 
@@ -270,6 +275,8 @@ function getBrowserPosition() {
 }
 
 function showLocation(latitude, longitude) {
+  state.currentLocation={latitude,longitude};
+  state.locationAt=Date.now();
   if (state.locationMarker) state.locationMarker.remove();
   state.locationMarker = L.circleMarker([latitude, longitude], {
     radius: 7,
@@ -356,6 +363,11 @@ async function submitReport(event) {
   if (!elements.reportForm.reportValidity() || !state.selectedFeature) return;
 
   const form = new FormData(elements.reportForm);
+  const observations = {};
+  for (const field of ["cleanlinessScore", "queueWaitMinutes"]) {
+    const value = form.get(field);
+    if (typeof value === "string" && value.trim()) observations[field] = Number(value);
+  }
   try {
     const result = await api("/api/reports", {
       method: "POST",
@@ -363,7 +375,8 @@ async function submitReport(event) {
         hospitalId: state.selectedFeature.properties.id,
         queueLengthId: Number(form.get("queueLengthId")),
         cleanliness: form.get("cleanliness"),
-        userId: state.userId
+        userId: state.userId,
+        ...observations
       })
     });
     elements.reportDialog.close();
@@ -428,6 +441,7 @@ function toggleProximityMonitoring() {
 }
 
 function formatDate(value, includeTime) {
+  if(!value)return "Not available";
   const date = new Date(value);
   if (Number.isNaN(date.getTime())) return "Not available";
   return new Intl.DateTimeFormat("en-GB", {
@@ -478,9 +492,37 @@ async function initialise() {
   lucide.createIcons();
   try {
     await loadOverview({ fit: true });
+    if(window.QueueLensAgentUI)await window.QueueLensAgentUI.initialise({host:document.getElementById("agentPanel"),adapter:leafletAgentAdapter(),getLocation:()=>Date.now()-state.locationAt<300000?state.currentLocation:null});
   } catch (error) {
     showToast(`Unable to load the application: ${error.message}`, true);
   }
 }
 
 document.addEventListener("DOMContentLoaded", initialise);
+
+function leafletAgentAdapter(){
+  let features=new Map();
+  const mark=(ids,ranked=false)=>{for(const [id,marker] of state.markerByHospitalId){const h=features.get(id);const colour=h?.properties.queueColour||state.visibleFeatures.find(f=>f.properties.id===id)?.properties.queueColour||"#087f72";const index=ids.indexOf(id);marker.setIcon(L.divIcon({className:"hospital-div-icon",html:`<span class="hospital-marker ${index>=0?'agent-highlight':''} ${ranked&&index>=0?'agent-ranked':''}" style="--marker-colour:${colour}">${ranked&&index>=0?index+1:''}</span>`,iconSize:[30,30],iconAnchor:[15,28]}));}};
+  return {
+    prepare(entities){
+      features=new Map(entities.map(h=>[h.hospital_id,{type:"Feature",geometry:{type:"Point",coordinates:[h.longitude,h.latitude]},properties:{id:h.hospital_id,name:h.name,queueDescription:h.queue_description,queueColour:state.queueLengths.find(q=>q.description===h.queue_description)?.colour||"#087f72",cleanliness:h.cleanliness_note,latestReportAt:h.latest_report_at,lastInspected:state.allFeatures.find(f=>f.properties.id===h.hospital_id)?.properties.lastInspected||null}}]));
+      for(const [id,feature] of features){
+        let marker=state.markerByHospitalId.get(id);
+        const [lon,lat]=feature.geometry.coordinates;
+        if(!marker){
+          marker=L.marker([lat,lon],{icon:markerIcon(feature.properties.queueColour),title:feature.properties.name}).addTo(state.hospitalLayer);
+          state.markerByHospitalId.set(id,marker);
+        }else{
+          marker.setLatLng([lat,lon]);
+          marker.getElement()?.setAttribute("title",feature.properties.name);
+        }
+        marker.off("click").on("click",()=>selectHospital(feature));
+      }
+    },
+    filter(ids){renderHospitals({features:ids.map(id=>features.get(id))});},
+    fit_bounds(ids){state.map.fitBounds(ids.map(id=>{const [lon,lat]=features.get(id).geometry.coordinates;return[lat,lon];}),{padding:[42,42],maxZoom:15});},
+    highlight(ids){mark(ids);},rank(ids){mark(ids,true);},compare(ids){mark(ids);},
+    fly_to(id){const[lon,lat]=features.get(id).geometry.coordinates;state.map.flyTo([lat,lon],16);},
+    async open_popup(id){const feature=features.get(id),content=document.createElement("div");content.textContent=feature.properties.name;state.markerByHospitalId.get(id)?.bindPopup(content).openPopup();await selectHospital(feature);}
+  };
+}

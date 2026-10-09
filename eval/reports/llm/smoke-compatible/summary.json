@@ -1,0 +1,3438 @@
+{
+  "metadata": {
+    "benchmark_version": "development-smoke",
+    "split": "smoke",
+    "case_count": 16,
+    "category_counts": {
+      "lookup": 2,
+      "nearest": 1,
+      "radius": 1,
+      "attribute_filter": 1,
+      "spatial_attribute": 1,
+      "temporal": 2,
+      "ranking": 1,
+      "comparison": 1,
+      "multi_step": 2,
+      "follow_up": 2,
+      "no_result": 1,
+      "invalid_input": 1
+    },
+    "model": "deepseek-flash",
+    "temperature": 0,
+    "thinking": "disabled",
+    "max_tokens": 4096,
+    "benchmark_sha256": "e1ce534989656c88e2720372a4ddb40e6dba74864c0ce768c04632bb705b42de",
+    "fixture_sha256": "6ffd1b4737e2f2d6258d161e07a3f8fe7c83a1925baca491fdc5b3ffac7f3b88",
+    "implementation_sha256": "142221afd708ce7a87820fc77b0f294bc939dbc5370acf9f29162e7472ebf29e",
+    "reference_clock": "2026-06-01T12:00:00Z",
+    "database_version": {
+      "postgres": "16.15",
+      "postgis": "3.6.2"
+    },
+    "repeats": 1,
+    "concurrency": 4,
+    "shuffle_seed": 20261007,
+    "max_request_seconds": 30,
+    "max_transient_retries": 1,
+    "cost": null,
+    "created_at": "2026-10-07T19:04:09.544377+08:00"
+  },
+  "systems": {
+    "llm_only": {
+      "metrics": {
+        "execution_success_rate": {
+          "passed": 2,
+          "total": 16,
+          "rate": 0.125
+        },
+        "constraint_satisfaction_rate": {
+          "passed": 2,
+          "total": 16,
+          "rate": 0.125
+        },
+        "final_entity_accuracy": {
+          "passed": 2,
+          "total": 16,
+          "rate": 0.125
+        },
+        "answer_groundedness": {
+          "passed": 16,
+          "total": 16,
+          "rate": 1.0
+        },
+        "map_action_accuracy": {
+          "passed": 2,
+          "total": 16,
+          "rate": 0.125
+        },
+        "end_to_end_success_rate": {
+          "passed": 2,
+          "total": 16,
+          "rate": 0.125
+        },
+        "workflow_success_rate": {
+          "passed": 2,
+          "total": 16,
+          "rate": 0.125
+        },
+        "latency_ms": {
+          "mean": 2033.6434500059113,
+          "p50": 2062.3724999604747,
+          "p95": 2785.019899951294
+        },
+        "tool_call_count": {
+          "total": 0,
+          "mean": 0.0
+        },
+        "token_usage": {
+          "prompt_tokens": 4806,
+          "completion_tokens": 520
+        },
+        "monetary_cost": null
+      },
+      "by_category": {
+        "lookup": {
+          "execution_success_rate": {
+            "passed": 0,
+            "total": 2,
+            "rate": 0.0
+          },
+          "constraint_satisfaction_rate": {
+            "passed": 0,
+            "total": 2,
+            "rate": 0.0
+          },
+          "final_entity_accuracy": {
+            "passed": 0,
+            "total": 2,
+            "rate": 0.0
+          },
+          "answer_groundedness": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "map_action_accuracy": {
+            "passed": 0,
+            "total": 2,
+            "rate": 0.0
+          },
+          "end_to_end_success_rate": {
+            "passed": 0,
+            "total": 2,
+            "rate": 0.0
+          },
+          "workflow_success_rate": {
+            "passed": 0,
+            "total": 2,
+            "rate": 0.0
+          },
+          "latency_ms": {
+            "mean": 1542.4799000029452,
+            "p50": 1315.0717000244185,
+            "p95": 1315.0717000244185
+          },
+          "tool_call_count": {
+            "total": 0,
+            "mean": 0.0
+          },
+          "token_usage": {
+            "prompt_tokens": 562,
+            "completion_tokens": 60
+          },
+          "monetary_cost": null
+        },
+        "nearest": {
+          "execution_success_rate": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "constraint_satisfaction_rate": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "final_entity_accuracy": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "answer_groundedness": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "map_action_accuracy": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "end_to_end_success_rate": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "workflow_success_rate": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "latency_ms": {
+            "mean": 1865.3860000194982,
+            "p50": 1865.3860000194982,
+            "p95": 1865.3860000194982
+          },
+          "tool_call_count": {
+            "total": 0,
+            "mean": 0.0
+          },
+          "token_usage": {
+            "prompt_tokens": 278,
+            "completion_tokens": 30
+          },
+          "monetary_cost": null
+        },
+        "radius": {
+          "execution_success_rate": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "constraint_satisfaction_rate": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "final_entity_accuracy": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "answer_groundedness": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "map_action_accuracy": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "end_to_end_success_rate": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "workflow_success_rate": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "latency_ms": {
+            "mean": 2381.036499980837,
+            "p50": 2381.036499980837,
+            "p95": 2381.036499980837
+          },
+          "tool_call_count": {
+            "total": 0,
+            "mean": 0.0
+          },
+          "token_usage": {
+            "prompt_tokens": 278,
+            "completion_tokens": 30
+          },
+          "monetary_cost": null
+        },
+        "attribute_filter": {
+          "execution_success_rate": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "constraint_satisfaction_rate": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "final_entity_accuracy": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "answer_groundedness": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "map_action_accuracy": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "end_to_end_success_rate": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "workflow_success_rate": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "latency_ms": {
+            "mean": 2011.7441000184044,
+            "p50": 2011.7441000184044,
+            "p95": 2011.7441000184044
+          },
+          "tool_call_count": {
+            "total": 0,
+            "mean": 0.0
+          },
+          "token_usage": {
+            "prompt_tokens": 282,
+            "completion_tokens": 30
+          },
+          "monetary_cost": null
+        },
+        "spatial_attribute": {
+          "execution_success_rate": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "constraint_satisfaction_rate": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "final_entity_accuracy": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "answer_groundedness": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "map_action_accuracy": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "end_to_end_success_rate": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "workflow_success_rate": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "latency_ms": {
+            "mean": 1712.2681000037119,
+            "p50": 1712.2681000037119,
+            "p95": 1712.2681000037119
+          },
+          "tool_call_count": {
+            "total": 0,
+            "mean": 0.0
+          },
+          "token_usage": {
+            "prompt_tokens": 282,
+            "completion_tokens": 30
+          },
+          "monetary_cost": null
+        },
+        "temporal": {
+          "execution_success_rate": {
+            "passed": 0,
+            "total": 2,
+            "rate": 0.0
+          },
+          "constraint_satisfaction_rate": {
+            "passed": 0,
+            "total": 2,
+            "rate": 0.0
+          },
+          "final_entity_accuracy": {
+            "passed": 0,
+            "total": 2,
+            "rate": 0.0
+          },
+          "answer_groundedness": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "map_action_accuracy": {
+            "passed": 0,
+            "total": 2,
+            "rate": 0.0
+          },
+          "end_to_end_success_rate": {
+            "passed": 0,
+            "total": 2,
+            "rate": 0.0
+          },
+          "workflow_success_rate": {
+            "passed": 0,
+            "total": 2,
+            "rate": 0.0
+          },
+          "latency_ms": {
+            "mean": 2377.816750027705,
+            "p50": 2233.7722000665963,
+            "p95": 2233.7722000665963
+          },
+          "tool_call_count": {
+            "total": 0,
+            "mean": 0.0
+          },
+          "token_usage": {
+            "prompt_tokens": 568,
+            "completion_tokens": 60
+          },
+          "monetary_cost": null
+        },
+        "ranking": {
+          "execution_success_rate": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "constraint_satisfaction_rate": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "final_entity_accuracy": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "answer_groundedness": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "map_action_accuracy": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "end_to_end_success_rate": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "workflow_success_rate": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "latency_ms": {
+            "mean": 2345.009500044398,
+            "p50": 2345.009500044398,
+            "p95": 2345.009500044398
+          },
+          "tool_call_count": {
+            "total": 0,
+            "mean": 0.0
+          },
+          "token_usage": {
+            "prompt_tokens": 282,
+            "completion_tokens": 30
+          },
+          "monetary_cost": null
+        },
+        "comparison": {
+          "execution_success_rate": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "constraint_satisfaction_rate": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "final_entity_accuracy": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "answer_groundedness": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "map_action_accuracy": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "end_to_end_success_rate": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "workflow_success_rate": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "latency_ms": {
+            "mean": 2062.3724999604747,
+            "p50": 2062.3724999604747,
+            "p95": 2062.3724999604747
+          },
+          "tool_call_count": {
+            "total": 0,
+            "mean": 0.0
+          },
+          "token_usage": {
+            "prompt_tokens": 287,
+            "completion_tokens": 30
+          },
+          "monetary_cost": null
+        },
+        "multi_step": {
+          "execution_success_rate": {
+            "passed": 0,
+            "total": 2,
+            "rate": 0.0
+          },
+          "constraint_satisfaction_rate": {
+            "passed": 0,
+            "total": 2,
+            "rate": 0.0
+          },
+          "final_entity_accuracy": {
+            "passed": 0,
+            "total": 2,
+            "rate": 0.0
+          },
+          "answer_groundedness": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "map_action_accuracy": {
+            "passed": 0,
+            "total": 2,
+            "rate": 0.0
+          },
+          "end_to_end_success_rate": {
+            "passed": 0,
+            "total": 2,
+            "rate": 0.0
+          },
+          "workflow_success_rate": {
+            "passed": 0,
+            "total": 2,
+            "rate": 0.0
+          },
+          "latency_ms": {
+            "mean": 1794.7767499717884,
+            "p50": 1442.1403999440372,
+            "p95": 1442.1403999440372
+          },
+          "tool_call_count": {
+            "total": 0,
+            "mean": 0.0
+          },
+          "token_usage": {
+            "prompt_tokens": 588,
+            "completion_tokens": 60
+          },
+          "monetary_cost": null
+        },
+        "follow_up": {
+          "execution_success_rate": {
+            "passed": 0,
+            "total": 2,
+            "rate": 0.0
+          },
+          "constraint_satisfaction_rate": {
+            "passed": 0,
+            "total": 2,
+            "rate": 0.0
+          },
+          "final_entity_accuracy": {
+            "passed": 0,
+            "total": 2,
+            "rate": 0.0
+          },
+          "answer_groundedness": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "map_action_accuracy": {
+            "passed": 0,
+            "total": 2,
+            "rate": 0.0
+          },
+          "end_to_end_success_rate": {
+            "passed": 0,
+            "total": 2,
+            "rate": 0.0
+          },
+          "workflow_success_rate": {
+            "passed": 0,
+            "total": 2,
+            "rate": 0.0
+          },
+          "latency_ms": {
+            "mean": 3304.978799948003,
+            "p50": 2785.019899951294,
+            "p95": 2785.019899951294
+          },
+          "tool_call_count": {
+            "total": 0,
+            "mean": 0.0
+          },
+          "token_usage": {
+            "prompt_tokens": 1122,
+            "completion_tokens": 130
+          },
+          "monetary_cost": null
+        },
+        "no_result": {
+          "execution_success_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "constraint_satisfaction_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "final_entity_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "answer_groundedness": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "map_action_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "end_to_end_success_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "workflow_success_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "latency_ms": {
+            "mean": 2120.3175000846386,
+            "p50": 2120.3175000846386,
+            "p95": 2120.3175000846386
+          },
+          "tool_call_count": {
+            "total": 0,
+            "mean": 0.0
+          },
+          "token_usage": {
+            "prompt_tokens": 277,
+            "completion_tokens": 30
+          },
+          "monetary_cost": null
+        },
+        "invalid_input": {
+          "execution_success_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "constraint_satisfaction_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "final_entity_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "answer_groundedness": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "map_action_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "end_to_end_success_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "workflow_success_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "latency_ms": {
+            "mean": 0.056600081734359264,
+            "p50": 0.056600081734359264,
+            "p95": 0.056600081734359264
+          },
+          "tool_call_count": {
+            "total": 0,
+            "mean": 0.0
+          },
+          "token_usage": {
+            "prompt_tokens": 0,
+            "completion_tokens": 0
+          },
+          "monetary_cost": null
+        }
+      },
+      "model_call_count": 17,
+      "retries": 0,
+      "severities": {
+        "S3": 14
+      },
+      "failure_types": {
+        "wrong_core_result": 14,
+        "map_action_mismatch": 14,
+        "wrong_follow_up_reference": 2
+      }
+    },
+    "text_to_sql": {
+      "metrics": {
+        "execution_success_rate": {
+          "passed": 14,
+          "total": 16,
+          "rate": 0.875
+        },
+        "constraint_satisfaction_rate": {
+          "passed": 10,
+          "total": 16,
+          "rate": 0.625
+        },
+        "final_entity_accuracy": {
+          "passed": 10,
+          "total": 16,
+          "rate": 0.625
+        },
+        "answer_groundedness": {
+          "passed": 15,
+          "total": 16,
+          "rate": 0.9375
+        },
+        "map_action_accuracy": {
+          "passed": 10,
+          "total": 16,
+          "rate": 0.625
+        },
+        "end_to_end_success_rate": {
+          "passed": 10,
+          "total": 16,
+          "rate": 0.625
+        },
+        "workflow_success_rate": {
+          "passed": 10,
+          "total": 16,
+          "rate": 0.625
+        },
+        "latency_ms": {
+          "mean": 2678.712712484412,
+          "p50": 2496.735900058411,
+          "p95": 4110.781399998814
+        },
+        "tool_call_count": {
+          "total": 0,
+          "mean": 0.0
+        },
+        "token_usage": {
+          "prompt_tokens": 6880,
+          "completion_tokens": 2059
+        },
+        "monetary_cost": null
+      },
+      "by_category": {
+        "lookup": {
+          "execution_success_rate": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "constraint_satisfaction_rate": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "final_entity_accuracy": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "answer_groundedness": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "map_action_accuracy": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "end_to_end_success_rate": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "workflow_success_rate": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "latency_ms": {
+            "mean": 2487.215799978003,
+            "p50": 2043.1629999075085,
+            "p95": 2043.1629999075085
+          },
+          "tool_call_count": {
+            "total": 0,
+            "mean": 0.0
+          },
+          "token_usage": {
+            "prompt_tokens": 812,
+            "completion_tokens": 110
+          },
+          "monetary_cost": null
+        },
+        "nearest": {
+          "execution_success_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "constraint_satisfaction_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "final_entity_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "answer_groundedness": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "map_action_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "end_to_end_success_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "workflow_success_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "latency_ms": {
+            "mean": 2324.888899922371,
+            "p50": 2324.888899922371,
+            "p95": 2324.888899922371
+          },
+          "tool_call_count": {
+            "total": 0,
+            "mean": 0.0
+          },
+          "token_usage": {
+            "prompt_tokens": 403,
+            "completion_tokens": 74
+          },
+          "monetary_cost": null
+        },
+        "radius": {
+          "execution_success_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "constraint_satisfaction_rate": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "final_entity_accuracy": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "answer_groundedness": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "map_action_accuracy": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "end_to_end_success_rate": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "workflow_success_rate": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "latency_ms": {
+            "mean": 2006.185800069943,
+            "p50": 2006.185800069943,
+            "p95": 2006.185800069943
+          },
+          "tool_call_count": {
+            "total": 0,
+            "mean": 0.0
+          },
+          "token_usage": {
+            "prompt_tokens": 403,
+            "completion_tokens": 70
+          },
+          "monetary_cost": null
+        },
+        "attribute_filter": {
+          "execution_success_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "constraint_satisfaction_rate": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "final_entity_accuracy": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "answer_groundedness": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "map_action_accuracy": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "end_to_end_success_rate": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "workflow_success_rate": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "latency_ms": {
+            "mean": 2504.5740000205114,
+            "p50": 2504.5740000205114,
+            "p95": 2504.5740000205114
+          },
+          "tool_call_count": {
+            "total": 0,
+            "mean": 0.0
+          },
+          "token_usage": {
+            "prompt_tokens": 407,
+            "completion_tokens": 128
+          },
+          "monetary_cost": null
+        },
+        "spatial_attribute": {
+          "execution_success_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "constraint_satisfaction_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "final_entity_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "answer_groundedness": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "map_action_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "end_to_end_success_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "workflow_success_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "latency_ms": {
+            "mean": 3252.531599951908,
+            "p50": 3252.531599951908,
+            "p95": 3252.531599951908
+          },
+          "tool_call_count": {
+            "total": 0,
+            "mean": 0.0
+          },
+          "token_usage": {
+            "prompt_tokens": 407,
+            "completion_tokens": 161
+          },
+          "monetary_cost": null
+        },
+        "temporal": {
+          "execution_success_rate": {
+            "passed": 1,
+            "total": 2,
+            "rate": 0.5
+          },
+          "constraint_satisfaction_rate": {
+            "passed": 1,
+            "total": 2,
+            "rate": 0.5
+          },
+          "final_entity_accuracy": {
+            "passed": 1,
+            "total": 2,
+            "rate": 0.5
+          },
+          "answer_groundedness": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "map_action_accuracy": {
+            "passed": 1,
+            "total": 2,
+            "rate": 0.5
+          },
+          "end_to_end_success_rate": {
+            "passed": 1,
+            "total": 2,
+            "rate": 0.5
+          },
+          "workflow_success_rate": {
+            "passed": 1,
+            "total": 2,
+            "rate": 0.5
+          },
+          "latency_ms": {
+            "mean": 2340.9770999569446,
+            "p50": 1983.188399928622,
+            "p95": 1983.188399928622
+          },
+          "tool_call_count": {
+            "total": 0,
+            "mean": 0.0
+          },
+          "token_usage": {
+            "prompt_tokens": 818,
+            "completion_tokens": 228
+          },
+          "monetary_cost": null
+        },
+        "ranking": {
+          "execution_success_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "constraint_satisfaction_rate": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "final_entity_accuracy": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "answer_groundedness": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "map_action_accuracy": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "end_to_end_success_rate": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "workflow_success_rate": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "latency_ms": {
+            "mean": 2496.735900058411,
+            "p50": 2496.735900058411,
+            "p95": 2496.735900058411
+          },
+          "tool_call_count": {
+            "total": 0,
+            "mean": 0.0
+          },
+          "token_usage": {
+            "prompt_tokens": 407,
+            "completion_tokens": 76
+          },
+          "monetary_cost": null
+        },
+        "comparison": {
+          "execution_success_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "constraint_satisfaction_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "final_entity_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "answer_groundedness": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "map_action_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "end_to_end_success_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "workflow_success_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "latency_ms": {
+            "mean": 3328.6472000181675,
+            "p50": 3328.6472000181675,
+            "p95": 3328.6472000181675
+          },
+          "tool_call_count": {
+            "total": 0,
+            "mean": 0.0
+          },
+          "token_usage": {
+            "prompt_tokens": 412,
+            "completion_tokens": 44
+          },
+          "monetary_cost": null
+        },
+        "multi_step": {
+          "execution_success_rate": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "constraint_satisfaction_rate": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "final_entity_accuracy": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "answer_groundedness": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "map_action_accuracy": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "end_to_end_success_rate": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "workflow_success_rate": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "latency_ms": {
+            "mean": 2674.625549931079,
+            "p50": 2183.8981999317184,
+            "p95": 2183.8981999317184
+          },
+          "tool_call_count": {
+            "total": 0,
+            "mean": 0.0
+          },
+          "token_usage": {
+            "prompt_tokens": 838,
+            "completion_tokens": 403
+          },
+          "monetary_cost": null
+        },
+        "follow_up": {
+          "execution_success_rate": {
+            "passed": 1,
+            "total": 2,
+            "rate": 0.5
+          },
+          "constraint_satisfaction_rate": {
+            "passed": 0,
+            "total": 2,
+            "rate": 0.0
+          },
+          "final_entity_accuracy": {
+            "passed": 0,
+            "total": 2,
+            "rate": 0.0
+          },
+          "answer_groundedness": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "map_action_accuracy": {
+            "passed": 0,
+            "total": 2,
+            "rate": 0.0
+          },
+          "end_to_end_success_rate": {
+            "passed": 0,
+            "total": 2,
+            "rate": 0.0
+          },
+          "workflow_success_rate": {
+            "passed": 0,
+            "total": 2,
+            "rate": 0.0
+          },
+          "latency_ms": {
+            "mean": 4802.006150013767,
+            "p50": 4110.781399998814,
+            "p95": 4110.781399998814
+          },
+          "tool_call_count": {
+            "total": 0,
+            "mean": 0.0
+          },
+          "token_usage": {
+            "prompt_tokens": 1571,
+            "completion_tokens": 695
+          },
+          "monetary_cost": null
+        },
+        "no_result": {
+          "execution_success_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "constraint_satisfaction_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "final_entity_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "answer_groundedness": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "map_action_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "end_to_end_success_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "workflow_success_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "latency_ms": {
+            "mean": 2336.145299952477,
+            "p50": 2336.145299952477,
+            "p95": 2336.145299952477
+          },
+          "tool_call_count": {
+            "total": 0,
+            "mean": 0.0
+          },
+          "token_usage": {
+            "prompt_tokens": 402,
+            "completion_tokens": 70
+          },
+          "monetary_cost": null
+        },
+        "invalid_input": {
+          "execution_success_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "constraint_satisfaction_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "final_entity_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "answer_groundedness": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "map_action_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "end_to_end_success_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "workflow_success_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "latency_ms": {
+            "mean": 0.04549999721348286,
+            "p50": 0.04549999721348286,
+            "p95": 0.04549999721348286
+          },
+          "tool_call_count": {
+            "total": 0,
+            "mean": 0.0
+          },
+          "token_usage": {
+            "prompt_tokens": 0,
+            "completion_tokens": 0
+          },
+          "monetary_cost": null
+        }
+      },
+      "model_call_count": 16,
+      "retries": 0,
+      "severities": {
+        "S3": 6
+      },
+      "failure_types": {
+        "wrong_core_result": 6,
+        "map_action_mismatch": 6,
+        "SQL_generation_failure": 1
+      }
+    },
+    "single_step": {
+      "metrics": {
+        "tool_selection_accuracy": {
+          "passed": 6,
+          "total": 16,
+          "rate": 0.375
+        },
+        "tool_argument_accuracy": {
+          "passed": 6,
+          "total": 16,
+          "rate": 0.375
+        },
+        "execution_success_rate": {
+          "passed": 12,
+          "total": 16,
+          "rate": 0.75
+        },
+        "constraint_satisfaction_rate": {
+          "passed": 6,
+          "total": 16,
+          "rate": 0.375
+        },
+        "final_entity_accuracy": {
+          "passed": 8,
+          "total": 16,
+          "rate": 0.5
+        },
+        "answer_groundedness": {
+          "passed": 16,
+          "total": 16,
+          "rate": 1.0
+        },
+        "map_action_accuracy": {
+          "passed": 8,
+          "total": 16,
+          "rate": 0.5
+        },
+        "end_to_end_success_rate": {
+          "passed": 6,
+          "total": 16,
+          "rate": 0.375
+        },
+        "workflow_success_rate": {
+          "passed": 6,
+          "total": 16,
+          "rate": 0.375
+        },
+        "latency_ms": {
+          "mean": 2725.8876499836333,
+          "p50": 2546.060899971053,
+          "p95": 4457.308099954389
+        },
+        "tool_call_count": {
+          "total": 14,
+          "mean": 0.875
+        },
+        "token_usage": {
+          "prompt_tokens": 96531,
+          "completion_tokens": 1062
+        },
+        "monetary_cost": null
+      },
+      "by_category": {
+        "lookup": {
+          "tool_selection_accuracy": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "tool_argument_accuracy": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "execution_success_rate": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "constraint_satisfaction_rate": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "final_entity_accuracy": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "answer_groundedness": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "map_action_accuracy": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "end_to_end_success_rate": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "workflow_success_rate": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "latency_ms": {
+            "mean": 2158.6384999682195,
+            "p50": 1778.9364999625832,
+            "p95": 1778.9364999625832
+          },
+          "tool_call_count": {
+            "total": 2,
+            "mean": 1.0
+          },
+          "token_usage": {
+            "prompt_tokens": 11088,
+            "completion_tokens": 66
+          },
+          "monetary_cost": null
+        },
+        "nearest": {
+          "tool_selection_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "tool_argument_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "execution_success_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "constraint_satisfaction_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "final_entity_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "answer_groundedness": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "map_action_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "end_to_end_success_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "workflow_success_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "latency_ms": {
+            "mean": 2038.6006999760866,
+            "p50": 2038.6006999760866,
+            "p95": 2038.6006999760866
+          },
+          "tool_call_count": {
+            "total": 1,
+            "mean": 1.0
+          },
+          "token_usage": {
+            "prompt_tokens": 5541,
+            "completion_tokens": 52
+          },
+          "monetary_cost": null
+        },
+        "radius": {
+          "tool_selection_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "tool_argument_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "execution_success_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "constraint_satisfaction_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "final_entity_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "answer_groundedness": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "map_action_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "end_to_end_success_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "workflow_success_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "latency_ms": {
+            "mean": 2938.7614000588655,
+            "p50": 2938.7614000588655,
+            "p95": 2938.7614000588655
+          },
+          "tool_call_count": {
+            "total": 1,
+            "mean": 1.0
+          },
+          "token_usage": {
+            "prompt_tokens": 5541,
+            "completion_tokens": 52
+          },
+          "monetary_cost": null
+        },
+        "attribute_filter": {
+          "tool_selection_accuracy": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "tool_argument_accuracy": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "execution_success_rate": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "constraint_satisfaction_rate": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "final_entity_accuracy": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "answer_groundedness": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "map_action_accuracy": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "end_to_end_success_rate": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "workflow_success_rate": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "latency_ms": {
+            "mean": 2788.1509999278933,
+            "p50": 2788.1509999278933,
+            "p95": 2788.1509999278933
+          },
+          "tool_call_count": {
+            "total": 0,
+            "mean": 0.0
+          },
+          "token_usage": {
+            "prompt_tokens": 5545,
+            "completion_tokens": 129
+          },
+          "monetary_cost": null
+        },
+        "spatial_attribute": {
+          "tool_selection_accuracy": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "tool_argument_accuracy": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "execution_success_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "constraint_satisfaction_rate": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "final_entity_accuracy": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "answer_groundedness": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "map_action_accuracy": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "end_to_end_success_rate": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "workflow_success_rate": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "latency_ms": {
+            "mean": 3061.0762999858707,
+            "p50": 3061.0762999858707,
+            "p95": 3061.0762999858707
+          },
+          "tool_call_count": {
+            "total": 1,
+            "mean": 1.0
+          },
+          "token_usage": {
+            "prompt_tokens": 5545,
+            "completion_tokens": 52
+          },
+          "monetary_cost": null
+        },
+        "temporal": {
+          "tool_selection_accuracy": {
+            "passed": 0,
+            "total": 2,
+            "rate": 0.0
+          },
+          "tool_argument_accuracy": {
+            "passed": 0,
+            "total": 2,
+            "rate": 0.0
+          },
+          "execution_success_rate": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "constraint_satisfaction_rate": {
+            "passed": 0,
+            "total": 2,
+            "rate": 0.0
+          },
+          "final_entity_accuracy": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "answer_groundedness": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "map_action_accuracy": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "end_to_end_success_rate": {
+            "passed": 0,
+            "total": 2,
+            "rate": 0.0
+          },
+          "workflow_success_rate": {
+            "passed": 0,
+            "total": 2,
+            "rate": 0.0
+          },
+          "latency_ms": {
+            "mean": 3084.3331500072964,
+            "p50": 2461.687200004235,
+            "p95": 2461.687200004235
+          },
+          "tool_call_count": {
+            "total": 2,
+            "mean": 1.0
+          },
+          "token_usage": {
+            "prompt_tokens": 11094,
+            "completion_tokens": 66
+          },
+          "monetary_cost": null
+        },
+        "ranking": {
+          "tool_selection_accuracy": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "tool_argument_accuracy": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "execution_success_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "constraint_satisfaction_rate": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "final_entity_accuracy": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "answer_groundedness": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "map_action_accuracy": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "end_to_end_success_rate": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "workflow_success_rate": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "latency_ms": {
+            "mean": 2381.1541999457404,
+            "p50": 2381.1541999457404,
+            "p95": 2381.1541999457404
+          },
+          "tool_call_count": {
+            "total": 1,
+            "mean": 1.0
+          },
+          "token_usage": {
+            "prompt_tokens": 5545,
+            "completion_tokens": 59
+          },
+          "monetary_cost": null
+        },
+        "comparison": {
+          "tool_selection_accuracy": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "tool_argument_accuracy": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "execution_success_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "constraint_satisfaction_rate": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "final_entity_accuracy": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "answer_groundedness": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "map_action_accuracy": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "end_to_end_success_rate": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "workflow_success_rate": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "latency_ms": {
+            "mean": 2546.060899971053,
+            "p50": 2546.060899971053,
+            "p95": 2546.060899971053
+          },
+          "tool_call_count": {
+            "total": 1,
+            "mean": 1.0
+          },
+          "token_usage": {
+            "prompt_tokens": 5550,
+            "completion_tokens": 33
+          },
+          "monetary_cost": null
+        },
+        "multi_step": {
+          "tool_selection_accuracy": {
+            "passed": 0,
+            "total": 2,
+            "rate": 0.0
+          },
+          "tool_argument_accuracy": {
+            "passed": 0,
+            "total": 2,
+            "rate": 0.0
+          },
+          "execution_success_rate": {
+            "passed": 0,
+            "total": 2,
+            "rate": 0.0
+          },
+          "constraint_satisfaction_rate": {
+            "passed": 0,
+            "total": 2,
+            "rate": 0.0
+          },
+          "final_entity_accuracy": {
+            "passed": 0,
+            "total": 2,
+            "rate": 0.0
+          },
+          "answer_groundedness": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "map_action_accuracy": {
+            "passed": 0,
+            "total": 2,
+            "rate": 0.0
+          },
+          "end_to_end_success_rate": {
+            "passed": 0,
+            "total": 2,
+            "rate": 0.0
+          },
+          "workflow_success_rate": {
+            "passed": 0,
+            "total": 2,
+            "rate": 0.0
+          },
+          "latency_ms": {
+            "mean": 2783.1894499831833,
+            "p50": 2576.738999923691,
+            "p95": 2576.738999923691
+          },
+          "tool_call_count": {
+            "total": 0,
+            "mean": 0.0
+          },
+          "token_usage": {
+            "prompt_tokens": 11114,
+            "completion_tokens": 278
+          },
+          "monetary_cost": null
+        },
+        "follow_up": {
+          "tool_selection_accuracy": {
+            "passed": 0,
+            "total": 2,
+            "rate": 0.0
+          },
+          "tool_argument_accuracy": {
+            "passed": 0,
+            "total": 2,
+            "rate": 0.0
+          },
+          "execution_success_rate": {
+            "passed": 1,
+            "total": 2,
+            "rate": 0.5
+          },
+          "constraint_satisfaction_rate": {
+            "passed": 0,
+            "total": 2,
+            "rate": 0.0
+          },
+          "final_entity_accuracy": {
+            "passed": 0,
+            "total": 2,
+            "rate": 0.0
+          },
+          "answer_groundedness": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "map_action_accuracy": {
+            "passed": 0,
+            "total": 2,
+            "rate": 0.0
+          },
+          "end_to_end_success_rate": {
+            "passed": 0,
+            "total": 2,
+            "rate": 0.0
+          },
+          "workflow_success_rate": {
+            "passed": 0,
+            "total": 2,
+            "rate": 0.0
+          },
+          "latency_ms": {
+            "mean": 4670.598750002682,
+            "p50": 4457.308099954389,
+            "p95": 4457.308099954389
+          },
+          "tool_call_count": {
+            "total": 4,
+            "mean": 2.0
+          },
+          "token_usage": {
+            "prompt_tokens": 24428,
+            "completion_tokens": 223
+          },
+          "monetary_cost": null
+        },
+        "no_result": {
+          "tool_selection_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "tool_argument_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "execution_success_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "constraint_satisfaction_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "final_entity_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "answer_groundedness": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "map_action_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "end_to_end_success_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "workflow_success_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "latency_ms": {
+            "mean": 2466.818399960175,
+            "p50": 2466.818399960175,
+            "p95": 2466.818399960175
+          },
+          "tool_call_count": {
+            "total": 1,
+            "mean": 1.0
+          },
+          "token_usage": {
+            "prompt_tokens": 5540,
+            "completion_tokens": 52
+          },
+          "monetary_cost": null
+        },
+        "invalid_input": {
+          "tool_selection_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "tool_argument_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "execution_success_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "constraint_satisfaction_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "final_entity_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "answer_groundedness": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "map_action_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "end_to_end_success_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "workflow_success_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "latency_ms": {
+            "mean": 0.05979998968541622,
+            "p50": 0.05979998968541622,
+            "p95": 0.05979998968541622
+          },
+          "tool_call_count": {
+            "total": 0,
+            "mean": 0.0
+          },
+          "token_usage": {
+            "prompt_tokens": 0,
+            "completion_tokens": 0
+          },
+          "monetary_cost": null
+        }
+      },
+      "model_call_count": 17,
+      "retries": 0,
+      "severities": {
+        "S2": 2,
+        "S3": 8
+      },
+      "failure_types": {
+        "wrong_tool_selection": 10,
+        "wrong_arguments": 10,
+        "wrong_core_result": 8,
+        "map_action_mismatch": 8,
+        "wrong_follow_up_reference": 2
+      }
+    },
+    "proposed_llm": {
+      "metrics": {
+        "tool_selection_accuracy": {
+          "passed": 16,
+          "total": 16,
+          "rate": 1.0
+        },
+        "tool_argument_accuracy": {
+          "passed": 12,
+          "total": 16,
+          "rate": 0.75
+        },
+        "execution_success_rate": {
+          "passed": 16,
+          "total": 16,
+          "rate": 1.0
+        },
+        "constraint_satisfaction_rate": {
+          "passed": 14,
+          "total": 16,
+          "rate": 0.875
+        },
+        "final_entity_accuracy": {
+          "passed": 14,
+          "total": 16,
+          "rate": 0.875
+        },
+        "answer_groundedness": {
+          "passed": 15,
+          "total": 16,
+          "rate": 0.9375
+        },
+        "map_action_accuracy": {
+          "passed": 14,
+          "total": 16,
+          "rate": 0.875
+        },
+        "end_to_end_success_rate": {
+          "passed": 12,
+          "total": 16,
+          "rate": 0.75
+        },
+        "workflow_success_rate": {
+          "passed": 12,
+          "total": 16,
+          "rate": 0.75
+        },
+        "intent_accuracy": {
+          "passed": 14,
+          "total": 16,
+          "rate": 0.875
+        },
+        "semantic_success_rate": {
+          "passed": 11,
+          "total": 16,
+          "rate": 0.6875
+        },
+        "spatial_constraint_accuracy": {
+          "passed": 15,
+          "total": 15,
+          "rate": 1.0
+        },
+        "temporal_constraint_accuracy": {
+          "passed": 15,
+          "total": 15,
+          "rate": 1.0
+        },
+        "filter_extraction_accuracy": {
+          "passed": 15,
+          "total": 15,
+          "rate": 1.0
+        },
+        "reference_resolution_accuracy": {
+          "passed": 15,
+          "total": 15,
+          "rate": 1.0
+        },
+        "objective_extraction_accuracy": {
+          "passed": 3,
+          "total": 5,
+          "rate": 0.6
+        },
+        "limit_extraction_accuracy": {
+          "passed": 4,
+          "total": 5,
+          "rate": 0.8
+        },
+        "latency_ms": {
+          "mean": 3365.594581264304,
+          "p50": 3409.0688000433147,
+          "p95": 4656.334000057541
+        },
+        "tool_call_count": {
+          "total": 35,
+          "mean": 2.1875
+        },
+        "token_usage": {
+          "prompt_tokens": 105971,
+          "completion_tokens": 605
+        },
+        "monetary_cost": null
+      },
+      "by_category": {
+        "lookup": {
+          "tool_selection_accuracy": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "tool_argument_accuracy": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "execution_success_rate": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "constraint_satisfaction_rate": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "final_entity_accuracy": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "answer_groundedness": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "map_action_accuracy": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "end_to_end_success_rate": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "workflow_success_rate": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "intent_accuracy": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "spatial_constraint_accuracy": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "temporal_constraint_accuracy": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "filter_extraction_accuracy": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "reference_resolution_accuracy": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "semantic_success_rate": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "latency_ms": {
+            "mean": 3429.0292500518262,
+            "p50": 3409.0688000433147,
+            "p95": 3409.0688000433147
+          },
+          "tool_call_count": {
+            "total": 4,
+            "mean": 2.0
+          },
+          "token_usage": {
+            "prompt_tokens": 12292,
+            "completion_tokens": 42
+          },
+          "monetary_cost": null
+        },
+        "nearest": {
+          "tool_selection_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "tool_argument_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "execution_success_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "constraint_satisfaction_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "final_entity_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "answer_groundedness": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "map_action_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "end_to_end_success_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "workflow_success_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "intent_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "spatial_constraint_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "temporal_constraint_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "filter_extraction_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "reference_resolution_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "semantic_success_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "latency_ms": {
+            "mean": 2334.739699959755,
+            "p50": 2334.739699959755,
+            "p95": 2334.739699959755
+          },
+          "tool_call_count": {
+            "total": 1,
+            "mean": 1.0
+          },
+          "token_usage": {
+            "prompt_tokens": 6143,
+            "completion_tokens": 104
+          },
+          "monetary_cost": null
+        },
+        "radius": {
+          "tool_selection_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "tool_argument_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "execution_success_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "constraint_satisfaction_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "final_entity_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "answer_groundedness": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "map_action_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "end_to_end_success_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "workflow_success_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "intent_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "spatial_constraint_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "temporal_constraint_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "filter_extraction_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "reference_resolution_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "semantic_success_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "latency_ms": {
+            "mean": 3453.8227999582887,
+            "p50": 3453.8227999582887,
+            "p95": 3453.8227999582887
+          },
+          "tool_call_count": {
+            "total": 1,
+            "mean": 1.0
+          },
+          "token_usage": {
+            "prompt_tokens": 6143,
+            "completion_tokens": 14
+          },
+          "monetary_cost": null
+        },
+        "attribute_filter": {
+          "tool_selection_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "tool_argument_accuracy": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "execution_success_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "constraint_satisfaction_rate": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "final_entity_accuracy": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "answer_groundedness": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "map_action_accuracy": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "end_to_end_success_rate": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "workflow_success_rate": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "intent_accuracy": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "spatial_constraint_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "temporal_constraint_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "filter_extraction_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "objective_extraction_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "limit_extraction_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "reference_resolution_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "semantic_success_rate": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "latency_ms": {
+            "mean": 3247.519800090231,
+            "p50": 3247.519800090231,
+            "p95": 3247.519800090231
+          },
+          "tool_call_count": {
+            "total": 2,
+            "mean": 2.0
+          },
+          "token_usage": {
+            "prompt_tokens": 6147,
+            "completion_tokens": 22
+          },
+          "monetary_cost": null
+        },
+        "spatial_attribute": {
+          "tool_selection_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "tool_argument_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "execution_success_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "constraint_satisfaction_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "final_entity_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "answer_groundedness": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "map_action_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "end_to_end_success_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "workflow_success_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "intent_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "spatial_constraint_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "temporal_constraint_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "filter_extraction_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "objective_extraction_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "limit_extraction_accuracy": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "reference_resolution_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "semantic_success_rate": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "latency_ms": {
+            "mean": 2871.5054000495,
+            "p50": 2871.5054000495,
+            "p95": 2871.5054000495
+          },
+          "tool_call_count": {
+            "total": 2,
+            "mean": 2.0
+          },
+          "token_usage": {
+            "prompt_tokens": 6147,
+            "completion_tokens": 42
+          },
+          "monetary_cost": null
+        },
+        "temporal": {
+          "tool_selection_accuracy": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "tool_argument_accuracy": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "execution_success_rate": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "constraint_satisfaction_rate": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "final_entity_accuracy": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "answer_groundedness": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "map_action_accuracy": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "end_to_end_success_rate": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "workflow_success_rate": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "intent_accuracy": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "spatial_constraint_accuracy": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "temporal_constraint_accuracy": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "filter_extraction_accuracy": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "reference_resolution_accuracy": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "semantic_success_rate": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "latency_ms": {
+            "mean": 3410.340400005225,
+            "p50": 3070.420300005935,
+            "p95": 3070.420300005935
+          },
+          "tool_call_count": {
+            "total": 6,
+            "mean": 3.0
+          },
+          "token_usage": {
+            "prompt_tokens": 12298,
+            "completion_tokens": 44
+          },
+          "monetary_cost": null
+        },
+        "ranking": {
+          "tool_selection_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "tool_argument_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "execution_success_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "constraint_satisfaction_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "final_entity_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "answer_groundedness": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "map_action_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "end_to_end_success_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "workflow_success_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "intent_accuracy": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "spatial_constraint_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "temporal_constraint_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "filter_extraction_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "objective_extraction_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "limit_extraction_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "reference_resolution_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "semantic_success_rate": {
+            "passed": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "latency_ms": {
+            "mean": 3714.858300052583,
+            "p50": 3714.858300052583,
+            "p95": 3714.858300052583
+          },
+          "tool_call_count": {
+            "total": 2,
+            "mean": 2.0
+          },
+          "token_usage": {
+            "prompt_tokens": 6147,
+            "completion_tokens": 89
+          },
+          "monetary_cost": null
+        },
+        "comparison": {
+          "tool_selection_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "tool_argument_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "execution_success_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "constraint_satisfaction_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "final_entity_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "answer_groundedness": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "map_action_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "end_to_end_success_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "workflow_success_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "intent_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "spatial_constraint_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "temporal_constraint_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "filter_extraction_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "reference_resolution_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "semantic_success_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "latency_ms": {
+            "mean": 4207.637900020927,
+            "p50": 4207.637900020927,
+            "p95": 4207.637900020927
+          },
+          "tool_call_count": {
+            "total": 5,
+            "mean": 5.0
+          },
+          "token_usage": {
+            "prompt_tokens": 6152,
+            "completion_tokens": 21
+          },
+          "monetary_cost": null
+        },
+        "multi_step": {
+          "tool_selection_accuracy": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "tool_argument_accuracy": {
+            "passed": 0,
+            "total": 2,
+            "rate": 0.0
+          },
+          "execution_success_rate": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "constraint_satisfaction_rate": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "final_entity_accuracy": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "answer_groundedness": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "map_action_accuracy": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "end_to_end_success_rate": {
+            "passed": 0,
+            "total": 2,
+            "rate": 0.0
+          },
+          "workflow_success_rate": {
+            "passed": 0,
+            "total": 2,
+            "rate": 0.0
+          },
+          "intent_accuracy": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "spatial_constraint_accuracy": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "temporal_constraint_accuracy": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "filter_extraction_accuracy": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "objective_extraction_accuracy": {
+            "passed": 0,
+            "total": 2,
+            "rate": 0.0
+          },
+          "limit_extraction_accuracy": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "reference_resolution_accuracy": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "semantic_success_rate": {
+            "passed": 0,
+            "total": 2,
+            "rate": 0.0
+          },
+          "latency_ms": {
+            "mean": 3587.775599968154,
+            "p50": 3017.4281999934465,
+            "p95": 3017.4281999934465
+          },
+          "tool_call_count": {
+            "total": 4,
+            "mean": 2.0
+          },
+          "token_usage": {
+            "prompt_tokens": 12318,
+            "completion_tokens": 130
+          },
+          "monetary_cost": null
+        },
+        "follow_up": {
+          "tool_selection_accuracy": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "tool_argument_accuracy": {
+            "passed": 1,
+            "total": 2,
+            "rate": 0.5
+          },
+          "execution_success_rate": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "constraint_satisfaction_rate": {
+            "passed": 1,
+            "total": 2,
+            "rate": 0.5
+          },
+          "final_entity_accuracy": {
+            "passed": 1,
+            "total": 2,
+            "rate": 0.5
+          },
+          "answer_groundedness": {
+            "passed": 1,
+            "total": 2,
+            "rate": 0.5
+          },
+          "map_action_accuracy": {
+            "passed": 1,
+            "total": 2,
+            "rate": 0.5
+          },
+          "end_to_end_success_rate": {
+            "passed": 1,
+            "total": 2,
+            "rate": 0.5
+          },
+          "workflow_success_rate": {
+            "passed": 1,
+            "total": 2,
+            "rate": 0.5
+          },
+          "intent_accuracy": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "spatial_constraint_accuracy": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "temporal_constraint_accuracy": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "filter_extraction_accuracy": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "reference_resolution_accuracy": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "semantic_success_rate": {
+            "passed": 2,
+            "total": 2,
+            "rate": 1.0
+          },
+          "latency_ms": {
+            "mean": 5293.222250009421,
+            "p50": 4656.334000057541,
+            "p95": 4656.334000057541
+          },
+          "tool_call_count": {
+            "total": 7,
+            "mean": 3.5
+          },
+          "token_usage": {
+            "prompt_tokens": 26042,
+            "completion_tokens": 83
+          },
+          "monetary_cost": null
+        },
+        "no_result": {
+          "tool_selection_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "tool_argument_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "execution_success_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "constraint_satisfaction_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "final_entity_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "answer_groundedness": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "map_action_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "end_to_end_success_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "workflow_success_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "intent_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "spatial_constraint_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "temporal_constraint_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "filter_extraction_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "reference_resolution_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "semantic_success_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "latency_ms": {
+            "mean": 2578.5063999937847,
+            "p50": 2578.5063999937847,
+            "p95": 2578.5063999937847
+          },
+          "tool_call_count": {
+            "total": 1,
+            "mean": 1.0
+          },
+          "token_usage": {
+            "prompt_tokens": 6142,
+            "completion_tokens": 14
+          },
+          "monetary_cost": null
+        },
+        "invalid_input": {
+          "tool_selection_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "tool_argument_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "execution_success_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "constraint_satisfaction_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "final_entity_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "answer_groundedness": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "map_action_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "end_to_end_success_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "workflow_success_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "intent_accuracy": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "semantic_success_rate": {
+            "passed": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "latency_ms": {
+            "mean": 0.18800003454089165,
+            "p50": 0.18800003454089165,
+            "p95": 0.18800003454089165
+          },
+          "tool_call_count": {
+            "total": 0,
+            "mean": 0.0
+          },
+          "token_usage": {
+            "prompt_tokens": 0,
+            "completion_tokens": 0
+          },
+          "monetary_cost": null
+        }
+      },
+      "model_call_count": 17,
+      "retries": 0,
+      "severities": {
+        "S3": 2,
+        "S2": 2
+      },
+      "failure_types": {
+        "intent_parsing_failure": 1,
+        "wrong_arguments": 4,
+        "wrong_core_result": 2,
+        "map_action_mismatch": 2,
+        "verifier_missed_error": 2,
+        "wrong_follow_up_reference": 1,
+        "wrong_ranking_objective": 2
+      }
+    }
+  }
+}

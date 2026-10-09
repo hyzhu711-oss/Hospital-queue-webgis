@@ -1,0 +1,296 @@
+[
+  {
+    "type": "SQL_generation_failure",
+    "system": "text_to_sql",
+    "id": "v2-test-adversarial-05",
+    "repeat": 1,
+    "severity": "S0"
+  },
+  {
+    "type": "SQL_generation_failure",
+    "system": "text_to_sql",
+    "id": "v2-test-adversarial-06",
+    "repeat": 1,
+    "severity": "S0"
+  },
+  {
+    "type": "SQL_generation_failure",
+    "system": "text_to_sql",
+    "id": "v2-test-adversarial-07",
+    "repeat": 1,
+    "severity": "S0"
+  },
+  {
+    "type": "ambiguity_handling_failure",
+    "system": "text_to_sql",
+    "id": "v2-test-ambiguous-01",
+    "repeat": 1,
+    "severity": "S0"
+  },
+  {
+    "type": "ambiguity_handling_failure",
+    "system": "single_step",
+    "id": "v2-test-ambiguous-05",
+    "repeat": 2,
+    "severity": "S3"
+  },
+  {
+    "type": "ambiguity_handling_failure",
+    "system": "llm_only",
+    "id": "v2-test-ambiguous-04",
+    "repeat": 1,
+    "severity": "S0"
+  },
+  {
+    "type": "empty_result_handling_failure",
+    "system": "proposed_llm",
+    "id": "v2-test-follow_up-16",
+    "repeat": 1,
+    "severity": "S0"
+  },
+  {
+    "type": "empty_result_handling_failure",
+    "system": "text_to_sql",
+    "id": "v2-test-adversarial-05",
+    "repeat": 1,
+    "severity": "S0"
+  },
+  {
+    "type": "empty_result_handling_failure",
+    "system": "single_step",
+    "id": "v2-test-adversarial-05",
+    "repeat": 1,
+    "severity": "S0"
+  },
+  {
+    "type": "format_or_execution_contract",
+    "system": "llm_only",
+    "id": "v2-test-ambiguous-01",
+    "repeat": 1,
+    "severity": "S0"
+  },
+  {
+    "type": "format_or_execution_contract",
+    "system": "llm_only",
+    "id": "v2-test-ambiguous-03",
+    "repeat": 1,
+    "severity": "S0"
+  },
+  {
+    "type": "format_or_execution_contract",
+    "system": "llm_only",
+    "id": "v2-test-ambiguous-06",
+    "repeat": 1,
+    "severity": "S0"
+  },
+  {
+    "type": "hallucinated_factual_answer",
+    "system": "llm_only",
+    "id": "v2-test-nearest-03",
+    "repeat": 1,
+    "severity": "S4"
+  },
+  {
+    "type": "intent_parsing_failure",
+    "system": "proposed_llm",
+    "id": "v2-test-ambiguous-03",
+    "repeat": 1,
+    "severity": "S0"
+  },
+  {
+    "type": "intent_parsing_failure",
+    "system": "proposed_llm",
+    "id": "v2-test-follow_up-02",
+    "repeat": 1,
+    "severity": "S2"
+  },
+  {
+    "type": "intent_parsing_failure",
+    "system": "proposed_llm",
+    "id": "v2-test-follow_up-06",
+    "repeat": 1,
+    "severity": "S2"
+  },
+  {
+    "type": "malformed_structured_output",
+    "system": "text_to_sql",
+    "id": "v2-test-invalid_input-09",
+    "repeat": 1,
+    "severity": "S0"
+  },
+  {
+    "type": "malformed_structured_output",
+    "system": "single_step",
+    "id": "v2-test-invalid_input-09",
+    "repeat": 1,
+    "severity": "S0"
+  },
+  {
+    "type": "map_action_mismatch",
+    "system": "proposed_llm",
+    "id": "v2-test-multi_step-06",
+    "repeat": 1,
+    "severity": "S3"
+  },
+  {
+    "type": "map_action_mismatch",
+    "system": "text_to_sql",
+    "id": "v2-test-ambiguous-03",
+    "repeat": 1,
+    "severity": "S3"
+  },
+  {
+    "type": "map_action_mismatch",
+    "system": "single_step",
+    "id": "v2-test-ambiguous-05",
+    "repeat": 2,
+    "severity": "S3"
+  },
+  {
+    "type": "schema_hallucination",
+    "system": "text_to_sql",
+    "id": "v2-test-multi_step-05",
+    "repeat": 1,
+    "severity": "S0"
+  },
+  {
+    "type": "schema_hallucination",
+    "system": "text_to_sql",
+    "id": "v2-test-multi_step-06",
+    "repeat": 2,
+    "severity": "S3"
+  },
+  {
+    "type": "schema_hallucination",
+    "system": "text_to_sql",
+    "id": "v2-test-multi_step-08",
+    "repeat": 1,
+    "severity": "S0"
+  },
+  {
+    "type": "tool_execution_failure",
+    "system": "single_step",
+    "id": "v2-test-attribute_filter-05",
+    "repeat": 2,
+    "severity": "S3"
+  },
+  {
+    "type": "verifier_missed_error",
+    "system": "proposed_llm",
+    "id": "v2-test-follow_up-02",
+    "repeat": 1,
+    "severity": "S2"
+  },
+  {
+    "type": "verifier_missed_error",
+    "system": "proposed_llm",
+    "id": "v2-test-follow_up-06",
+    "repeat": 1,
+    "severity": "S2"
+  },
+  {
+    "type": "verifier_missed_error",
+    "system": "proposed_llm",
+    "id": "v2-test-follow_up-10",
+    "repeat": 1,
+    "severity": "S2"
+  },
+  {
+    "type": "wrong_arguments",
+    "system": "proposed_llm",
+    "id": "v2-test-ambiguous-03",
+    "repeat": 1,
+    "severity": "S0"
+  },
+  {
+    "type": "wrong_arguments",
+    "system": "single_step",
+    "id": "v2-test-adversarial-06",
+    "repeat": 2,
+    "severity": "S0"
+  },
+  {
+    "type": "wrong_arguments",
+    "system": "single_step",
+    "id": "v2-test-adversarial-07",
+    "repeat": 2,
+    "severity": "S0"
+  },
+  {
+    "type": "wrong_core_result",
+    "system": "proposed_llm",
+    "id": "v2-test-multi_step-06",
+    "repeat": 1,
+    "severity": "S3"
+  },
+  {
+    "type": "wrong_core_result",
+    "system": "text_to_sql",
+    "id": "v2-test-attribute_filter-01",
+    "repeat": 1,
+    "severity": "S3"
+  },
+  {
+    "type": "wrong_core_result",
+    "system": "single_step",
+    "id": "v2-test-attribute_filter-01",
+    "repeat": 1,
+    "severity": "S3"
+  },
+  {
+    "type": "wrong_follow_up_reference",
+    "system": "proposed_llm",
+    "id": "v2-test-follow_up-20",
+    "repeat": 3,
+    "severity": "S0"
+  },
+  {
+    "type": "wrong_follow_up_reference",
+    "system": "single_step",
+    "id": "v2-test-follow_up-01",
+    "repeat": 1,
+    "severity": "S3"
+  },
+  {
+    "type": "wrong_follow_up_reference",
+    "system": "llm_only",
+    "id": "v2-test-adversarial-01",
+    "repeat": 1,
+    "severity": "S3"
+  },
+  {
+    "type": "wrong_ranking_objective",
+    "system": "proposed_llm",
+    "id": "v2-test-multi_step-14",
+    "repeat": 1,
+    "severity": "S2"
+  },
+  {
+    "type": "wrong_ranking_objective",
+    "system": "proposed_llm",
+    "id": "v2-test-multi_step-21",
+    "repeat": 2,
+    "severity": "S0"
+  },
+  {
+    "type": "wrong_tool_selection",
+    "system": "proposed_llm",
+    "id": "v2-test-ambiguous-03",
+    "repeat": 1,
+    "severity": "S0"
+  },
+  {
+    "type": "wrong_tool_selection",
+    "system": "single_step",
+    "id": "v2-test-adversarial-06",
+    "repeat": 2,
+    "severity": "S0"
+  },
+  {
+    "type": "wrong_tool_selection",
+    "system": "single_step",
+    "id": "v2-test-adversarial-07",
+    "repeat": 2,
+    "severity": "S0"
+  }
+]

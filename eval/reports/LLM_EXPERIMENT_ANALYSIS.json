@@ -1,0 +1,400 @@
+{
+  "metadata": {
+    "benchmark_version": "v2",
+    "split": "test",
+    "case_count": 180,
+    "category_counts": {
+      "lookup": 8,
+      "nearest": 8,
+      "radius": 8,
+      "attribute_filter": 10,
+      "spatial_attribute": 12,
+      "temporal": 12,
+      "ranking": 12,
+      "comparison": 12,
+      "multi_step": 30,
+      "follow_up": 24,
+      "ambiguous": 14,
+      "no_result": 12,
+      "invalid_input": 10,
+      "adversarial": 8
+    },
+    "model": "deepseek-flash",
+    "temperature": 0,
+    "thinking": "disabled",
+    "max_tokens": 4096,
+    "benchmark_sha256": "f11ad6e1e7aad387345749bb14090274dcedeb8b9988535bf71c94e257e4c9b5",
+    "fixture_sha256": "6ffd1b4737e2f2d6258d161e07a3f8fe7c83a1925baca491fdc5b3ffac7f3b88",
+    "implementation_sha256": "007132b4161bbbb8f08b72b8c7e638cfae2f8d1e6177f0a0bddea18c323e318b",
+    "reference_clock": "2026-06-01T12:00:00Z",
+    "database_version": {
+      "postgres": "16.15",
+      "postgis": "3.6.2"
+    },
+    "repeats": 3,
+    "concurrency": 6,
+    "shuffle_seed": 20261007,
+    "max_request_seconds": 30,
+    "max_transient_retries": 1,
+    "cost": null,
+    "created_at": "2026-10-07T19:32:01.530836+08:00"
+  },
+  "freeze": {
+    "benchmark_version": "2.0.0",
+    "status": "frozen_unexposed",
+    "case_count": 180,
+    "category_distribution": {
+      "lookup": 8,
+      "nearest": 8,
+      "radius": 8,
+      "attribute_filter": 10,
+      "spatial_attribute": 12,
+      "temporal": 12,
+      "ranking": 12,
+      "comparison": 12,
+      "multi_step": 30,
+      "follow_up": 24,
+      "ambiguous": 14,
+      "no_result": 12,
+      "invalid_input": 10,
+      "adversarial": 8
+    },
+    "expected_outcomes": {
+      "ok": 112,
+      "no_result": 34,
+      "reference_resolution_failure": 6,
+      "ambiguous": 14,
+      "invalid_input": 10,
+      "unsupported": 4
+    },
+    "test_sha256": "95fc064b1faea4afb125daec0e5844ff5b63a52385b1850b3449582010a61ea5",
+    "test_canonical_sha256": "f11ad6e1e7aad387345749bb14090274dcedeb8b9988535bf71c94e257e4c9b5",
+    "ground_truth_sha256": "1af67b3de6ba1bc28e91e31d3db94f94637d8ca340e748cb7f742a1c1ec3d986",
+    "validation_sha256": "f7ee978974e5527d533210c0b29df41f69f88829fd531ce5790ba87cea230d38",
+    "fixture_sha256": "6ffd1b4737e2f2d6258d161e07a3f8fe7c83a1925baca491fdc5b3ffac7f3b88",
+    "database_snapshot_sha256": "78ad896d62cb4f31f8d5a5545e4cb40c43368d73d523e72fe01da38de9a4194f",
+    "reference_clock": "2026-06-01T12:00:00Z",
+    "generation_seed": 20261007,
+    "git_base_commit": "72952e94992a70d97130bda18afb656043709328",
+    "working_tree_identifier": "007132b4161bbbb8f08b72b8c7e638cfae2f8d1e6177f0a0bddea18c323e318b",
+    "implementation_sha256": "007132b4161bbbb8f08b72b8c7e638cfae2f8d1e6177f0a0bddea18c323e318b",
+    "freeze_timestamp": "2026-10-07T19:30:46.275531+08:00",
+    "policy": "First formal test inference exposes the holdout. Do not tune and reuse it as unseen; create a new version if system changes are needed."
+  },
+  "systems": {
+    "llm_only": {
+      "rows": 540,
+      "metrics": {
+        "tool_selection_accuracy": null,
+        "tool_argument_accuracy": null,
+        "execution_success_rate": 0.32407407407407407,
+        "constraint_satisfaction_rate": 0.28888888888888886,
+        "final_entity_accuracy": 0.28888888888888886,
+        "answer_groundedness": 0.937037037037037,
+        "map_action_accuracy": 0.37777777777777777,
+        "end_to_end_success_rate": 0.2722222222222222,
+        "workflow_success_rate": 0.2722222222222222,
+        "intent_accuracy": null,
+        "spatial_constraint_accuracy": null,
+        "temporal_constraint_accuracy": null,
+        "filter_extraction_accuracy": null,
+        "objective_extraction_accuracy": null,
+        "limit_extraction_accuracy": null,
+        "reference_resolution_accuracy": null,
+        "semantic_success_rate": null
+      },
+      "pass_at_1": 0.2722222222222222,
+      "round_rates": [
+        0.2722222222222222,
+        0.2722222222222222,
+        0.2722222222222222
+      ],
+      "mean_success_rate": 0.2722222222222222,
+      "sample_standard_deviation": 0.0,
+      "first_run_wilson_interval": [
+        0.21246399571150315,
+        0.3414998514264678
+      ],
+      "consistency_rate": 0.9611111111111111,
+      "identical_plan_rate": null,
+      "identical_plan_denominator": 0,
+      "failure_recurrence": {
+        "3": 131,
+        "0": 49
+      },
+      "total_failures": 393,
+      "severity_distribution": {
+        "S3": 334,
+        "S0": 57,
+        "S4": 2
+      },
+      "failure_types": {
+        "wrong_core_result": 336,
+        "map_action_mismatch": 336,
+        "empty_result_handling_failure": 48,
+        "wrong_follow_up_reference": 75,
+        "format_or_execution_contract": 9,
+        "ambiguity_handling_failure": 3,
+        "hallucinated_factual_answer": 2
+      },
+      "severe_error_rate": 0.6222222222222222,
+      "fabricated_fact_rate": 0.003703703703703704,
+      "recoverable_failures": 15,
+      "verifier_caught": 0,
+      "verifier_missed": 0,
+      "latency_ms": {
+        "mean": 3440.3601609258826,
+        "p50": 2722.434900002554,
+        "p95": 7435.4474999709055
+      },
+      "model_calls": 618,
+      "retries": 0,
+      "tool_calls": 0,
+      "usage_coverage": 1.0,
+      "known_input_tokens": 382641,
+      "known_output_tokens": 30193,
+      "known_total_tokens": 412834,
+      "cost": null,
+      "positive_case_success": 0.0,
+      "negative_case_success": 0.7205882352941176
+    },
+    "text_to_sql": {
+      "rows": 540,
+      "metrics": {
+        "tool_selection_accuracy": null,
+        "tool_argument_accuracy": null,
+        "execution_success_rate": 0.4777777777777778,
+        "constraint_satisfaction_rate": 0.4203703703703704,
+        "final_entity_accuracy": 0.4203703703703704,
+        "answer_groundedness": 0.987037037037037,
+        "map_action_accuracy": 0.6574074074074074,
+        "end_to_end_success_rate": 0.4203703703703704,
+        "workflow_success_rate": 0.4203703703703704,
+        "intent_accuracy": null,
+        "spatial_constraint_accuracy": null,
+        "temporal_constraint_accuracy": null,
+        "filter_extraction_accuracy": null,
+        "objective_extraction_accuracy": null,
+        "limit_extraction_accuracy": null,
+        "reference_resolution_accuracy": null,
+        "semantic_success_rate": null
+      },
+      "pass_at_1": 0.4166666666666667,
+      "round_rates": [
+        0.4166666666666667,
+        0.42777777777777776,
+        0.4166666666666667
+      ],
+      "mean_success_rate": 0.4203703703703704,
+      "sample_standard_deviation": 0.006415002990995819,
+      "first_run_wilson_interval": [
+        0.3471199999300702,
+        0.4896960417057729
+      ],
+      "consistency_rate": 0.9388888888888889,
+      "identical_plan_rate": null,
+      "identical_plan_denominator": 0,
+      "failure_recurrence": {
+        "3": 99,
+        "0": 72,
+        "2": 7,
+        "1": 2
+      },
+      "total_failures": 313,
+      "severity_distribution": {
+        "S3": 185,
+        "S0": 128
+      },
+      "failure_types": {
+        "SQL_generation_failure": 274,
+        "schema_hallucination": 19,
+        "wrong_core_result": 183,
+        "map_action_mismatch": 185,
+        "empty_result_handling_failure": 130,
+        "ambiguity_handling_failure": 42,
+        "malformed_structured_output": 3
+      },
+      "severe_error_rate": 0.3425925925925926,
+      "fabricated_fact_rate": 0.0,
+      "recoverable_failures": 0,
+      "verifier_caught": 0,
+      "verifier_missed": 0,
+      "latency_ms": {
+        "mean": 3624.416219627838,
+        "p50": 3219.6310000726953,
+        "p95": 7116.734300041571
+      },
+      "model_calls": 528,
+      "retries": 0,
+      "tool_calls": 0,
+      "usage_coverage": 1.0,
+      "known_input_tokens": 394191,
+      "known_output_tokens": 98171,
+      "known_total_tokens": 492362,
+      "cost": null,
+      "positive_case_success": 0.45535714285714285,
+      "negative_case_success": 0.3627450980392157
+    },
+    "single_step": {
+      "rows": 540,
+      "metrics": {
+        "tool_selection_accuracy": 0.35555555555555557,
+        "tool_argument_accuracy": 0.35555555555555557,
+        "execution_success_rate": 0.48703703703703705,
+        "constraint_satisfaction_rate": 0.32037037037037036,
+        "final_entity_accuracy": 0.387037037037037,
+        "answer_groundedness": 0.975925925925926,
+        "map_action_accuracy": 0.5703703703703704,
+        "end_to_end_success_rate": 0.3148148148148148,
+        "workflow_success_rate": 0.3148148148148148,
+        "intent_accuracy": null,
+        "spatial_constraint_accuracy": null,
+        "temporal_constraint_accuracy": null,
+        "filter_extraction_accuracy": null,
+        "objective_extraction_accuracy": null,
+        "limit_extraction_accuracy": null,
+        "reference_resolution_accuracy": null,
+        "semantic_success_rate": null
+      },
+      "pass_at_1": 0.32222222222222224,
+      "round_rates": [
+        0.32222222222222224,
+        0.3055555555555556,
+        0.31666666666666665
+      ],
+      "mean_success_rate": 0.3148148148148148,
+      "sample_standard_deviation": 0.008486251286955253,
+      "first_run_wilson_interval": [
+        0.25828034373405556,
+        0.3935938784224097
+      ],
+      "consistency_rate": 0.8388888888888889,
+      "identical_plan_rate": null,
+      "identical_plan_denominator": 0,
+      "failure_recurrence": {
+        "3": 122,
+        "0": 55,
+        "1": 2,
+        "2": 1
+      },
+      "total_failures": 370,
+      "severity_distribution": {
+        "S3": 232,
+        "S2": 36,
+        "S0": 99,
+        "S1": 3
+      },
+      "failure_types": {
+        "wrong_tool_selection": 348,
+        "wrong_arguments": 348,
+        "wrong_core_result": 216,
+        "map_action_mismatch": 232,
+        "empty_result_handling_failure": 115,
+        "wrong_follow_up_reference": 26,
+        "malformed_structured_output": 3,
+        "ambiguity_handling_failure": 3,
+        "tool_execution_failure": 2
+      },
+      "severe_error_rate": 0.42962962962962964,
+      "fabricated_fact_rate": 0.0,
+      "recoverable_failures": 4,
+      "verifier_caught": 0,
+      "verifier_missed": 0,
+      "latency_ms": {
+        "mean": 4249.064140556018,
+        "p50": 3539.768400019966,
+        "p95": 8849.553999956697
+      },
+      "model_calls": 562,
+      "retries": 0,
+      "tool_calls": 267,
+      "usage_coverage": 1.0,
+      "known_input_tokens": 3345340,
+      "known_output_tokens": 45860,
+      "known_total_tokens": 3391200,
+      "cost": null,
+      "positive_case_success": 0.24107142857142858,
+      "negative_case_success": 0.4362745098039216
+    },
+    "proposed_llm": {
+      "rows": 540,
+      "metrics": {
+        "tool_selection_accuracy": 0.9666666666666667,
+        "tool_argument_accuracy": 0.9407407407407408,
+        "execution_success_rate": 0.9907407407407407,
+        "constraint_satisfaction_rate": 0.9574074074074074,
+        "final_entity_accuracy": 0.9851851851851852,
+        "answer_groundedness": 0.9944444444444445,
+        "map_action_accuracy": 0.9944444444444445,
+        "end_to_end_success_rate": 0.9314814814814815,
+        "workflow_success_rate": 0.9314814814814815,
+        "intent_accuracy": 0.8148148148148148,
+        "spatial_constraint_accuracy": 1.0,
+        "temporal_constraint_accuracy": 1.0,
+        "filter_extraction_accuracy": 1.0,
+        "objective_extraction_accuracy": 0.9754901960784313,
+        "limit_extraction_accuracy": 0.9558823529411765,
+        "reference_resolution_accuracy": 0.9978213507625272,
+        "semantic_success_rate": 0.7888888888888889
+      },
+      "pass_at_1": 0.9277777777777778,
+      "round_rates": [
+        0.9277777777777778,
+        0.9388888888888889,
+        0.9277777777777778
+      ],
+      "mean_success_rate": 0.9314814814814815,
+      "sample_standard_deviation": 0.006415002990995819,
+      "first_run_wilson_interval": [
+        0.8803669851119694,
+        0.9573106678240365
+      ],
+      "consistency_rate": 0.9722222222222222,
+      "identical_plan_rate": 0.9017341040462428,
+      "identical_plan_denominator": 173,
+      "failure_recurrence": {
+        "0": 165,
+        "1": 3,
+        "3": 10,
+        "2": 2
+      },
+      "total_failures": 37,
+      "severity_distribution": {
+        "S0": 16,
+        "S2": 18,
+        "S3": 3
+      },
+      "failure_types": {
+        "intent_parsing_failure": 23,
+        "wrong_follow_up_reference": 1,
+        "empty_result_handling_failure": 5,
+        "wrong_tool_selection": 18,
+        "wrong_arguments": 32,
+        "verifier_missed_error": 18,
+        "wrong_ranking_objective": 5,
+        "wrong_core_result": 3,
+        "map_action_mismatch": 3
+      },
+      "severe_error_rate": 0.005555555555555556,
+      "fabricated_fact_rate": 0.0,
+      "recoverable_failures": 5,
+      "verifier_caught": 0,
+      "verifier_missed": 18,
+      "latency_ms": {
+        "mean": 5535.3550712974675,
+        "p50": 4560.792200034484,
+        "p95": 12581.621999968775
+      },
+      "model_calls": 618,
+      "retries": 0,
+      "tool_calls": 1116,
+      "usage_coverage": 1.0,
+      "known_input_tokens": 4033545,
+      "known_output_tokens": 38099,
+      "known_total_tokens": 4071644,
+      "cost": null,
+      "positive_case_success": 0.9375,
+      "negative_case_success": 0.9215686274509803
+    }
+  }
+}

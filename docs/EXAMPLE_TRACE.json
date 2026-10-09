@@ -1,0 +1,710 @@
+{
+  "source": "eval/reports/postgis-smoke.json",
+  "generated_at": "2026-10-07T10:13:36.798341+00:00",
+  "semantic_mode": "explicit rule template smoke test; no LLM",
+  "case_id": "multi_step-02",
+  "query": "找2000米以内最近24小时平均排队较短，并且清洁度至少4.0分的三家医院。",
+  "location": {
+    "latitude": 51.5,
+    "longitude": -0.13
+  },
+  "reference_time": "2026-06-01T12:00:00Z",
+  "expected_hospital_ids": [
+    11,
+    1,
+    2
+  ],
+  "metrics": {
+    "tool_selection_accuracy": true,
+    "tool_argument_accuracy": true,
+    "execution_success_rate": true,
+    "constraint_satisfaction_rate": true,
+    "final_entity_accuracy": true,
+    "answer_groundedness": true,
+    "map_action_accuracy": true,
+    "end_to_end_success_rate": true
+  },
+  "result": {
+    "status": "ok",
+    "answer": "1. Hospital K（医院 ID 11），直线距离 111.3 米；窗口内 2 条报告，平均排队等级 1.00/5（不是分钟），报告的平均等待 10.00 分钟，平均清洁度 5.00/5（2 条评分），首末排队等级 1 → 1\n2. Hospital A（医院 ID 1），直线距离 111.3 米；窗口内 2 条报告，平均排队等级 2.00/5（不是分钟），报告的平均等待 20.00 分钟，平均清洁度 4.50/5（2 条评分），首末排队等级 3 → 1\n3. Hospital B（医院 ID 2），直线距离 333.8 米；窗口内 2 条报告，平均排队等级 2.00/5（不是分钟），报告的平均等待 20.00 分钟，平均清洁度 4.50/5（2 条评分），首末排队等级 2 → 2\n时间窗口 [2026-05-31T12:00:00+00:00, 2026-06-01T12:00:00+00:00)。",
+    "entities": [
+      {
+        "hospital_id": 11,
+        "name": "Hospital K",
+        "latitude": 51.501,
+        "longitude": -0.13,
+        "distance_m": 111.25784318,
+        "queue_description": "No queue",
+        "cleanliness_note": "Synthetic explicit observation",
+        "latest_report_id": 41,
+        "latest_report_at": "2026-06-01T12:00:00.000Z",
+        "cleanliness_score": 5,
+        "queue_wait_minutes": 10
+      },
+      {
+        "hospital_id": 1,
+        "name": "Hospital A",
+        "latitude": 51.501,
+        "longitude": -0.13,
+        "distance_m": 111.25784318,
+        "queue_description": "No queue",
+        "cleanliness_note": "Synthetic explicit observation",
+        "latest_report_id": 4,
+        "latest_report_at": "2026-06-01T12:00:00.000Z",
+        "cleanliness_score": 5,
+        "queue_wait_minutes": 10
+      },
+      {
+        "hospital_id": 2,
+        "name": "Hospital B",
+        "latitude": 51.503,
+        "longitude": -0.13,
+        "distance_m": 333.77358678,
+        "queue_description": "Under 15 minutes",
+        "cleanliness_note": "Synthetic explicit observation",
+        "latest_report_id": 8,
+        "latest_report_at": "2026-06-01T12:00:00.000Z",
+        "cleanliness_score": 4.5,
+        "queue_wait_minutes": 20
+      }
+    ],
+    "statistics": [
+      {
+        "hospital_id": 1,
+        "report_count": 2,
+        "known_queue_count": 2,
+        "average_queue_severity": 2,
+        "observed_wait_count": 2,
+        "average_wait_minutes": 20,
+        "cleanliness_count": 2,
+        "average_cleanliness": 4.5,
+        "min_cleanliness": 4,
+        "max_cleanliness": 5,
+        "first_report_at": "2026-05-31T12:00:00.000Z",
+        "last_report_at": "2026-06-01T00:00:00.000Z",
+        "first_queue_severity": 3,
+        "last_queue_severity": 1,
+        "report_ids": [
+          2,
+          3
+        ],
+        "report_ids_complete": true
+      },
+      {
+        "hospital_id": 2,
+        "report_count": 2,
+        "known_queue_count": 2,
+        "average_queue_severity": 2,
+        "observed_wait_count": 2,
+        "average_wait_minutes": 20,
+        "cleanliness_count": 2,
+        "average_cleanliness": 4.5,
+        "min_cleanliness": 4.5,
+        "max_cleanliness": 4.5,
+        "first_report_at": "2026-05-31T12:00:00.000Z",
+        "last_report_at": "2026-06-01T00:00:00.000Z",
+        "first_queue_severity": 2,
+        "last_queue_severity": 2,
+        "report_ids": [
+          6,
+          7
+        ],
+        "report_ids_complete": true
+      },
+      {
+        "hospital_id": 11,
+        "report_count": 2,
+        "known_queue_count": 2,
+        "average_queue_severity": 1,
+        "observed_wait_count": 2,
+        "average_wait_minutes": 10,
+        "cleanliness_count": 2,
+        "average_cleanliness": 5,
+        "min_cleanliness": 5,
+        "max_cleanliness": 5,
+        "first_report_at": "2026-05-31T12:00:00.000Z",
+        "last_report_at": "2026-06-01T00:00:00.000Z",
+        "first_queue_severity": 1,
+        "last_queue_severity": 1,
+        "report_ids": [
+          39,
+          40
+        ],
+        "report_ids_complete": true
+      }
+    ],
+    "map_actions": [
+      {
+        "type": "filter",
+        "hospital_ids": [
+          11,
+          1,
+          2
+        ]
+      },
+      {
+        "type": "fit_bounds",
+        "hospital_ids": [
+          11,
+          1,
+          2
+        ]
+      },
+      {
+        "type": "highlight",
+        "hospital_ids": [
+          11,
+          1,
+          2
+        ]
+      },
+      {
+        "type": "rank",
+        "hospital_ids": [
+          11,
+          1,
+          2
+        ]
+      },
+      {
+        "type": "open_popup",
+        "hospital_id": 11
+      }
+    ],
+    "plan": {
+      "intent": "multi_step",
+      "names": [],
+      "referent": null,
+      "radius_m": 2000.0,
+      "hours": 24.0,
+      "min_cleanliness": 4.0,
+      "max_queue_severity": null,
+      "max_wait_minutes": null,
+      "limit": 3,
+      "distance_weight": 0.0,
+      "queue_weight": 1.0,
+      "cleanliness_weight": 0.0
+    },
+    "planned_tools": [
+      "search_nearby_hospitals",
+      "rank_hospitals"
+    ],
+    "verification": {
+      "passed": true,
+      "checks": [
+        "tool_evidence",
+        "candidate_membership",
+        "time_window",
+        "entity_facts",
+        "statistics",
+        "filters",
+        "ranking"
+      ]
+    },
+    "trace": [
+      {
+        "step": 1,
+        "tool": "search_nearby_hospitals",
+        "arguments": {
+          "latitude": 51.5,
+          "longitude": -0.13,
+          "radius_m": 2000.0
+        },
+        "status": "ok",
+        "result": {
+          "version": "1.0",
+          "tool": "search_nearby_hospitals",
+          "arguments": {
+            "latitude": 51.5,
+            "longitude": -0.13,
+            "radius_m": 2000
+          },
+          "data": {
+            "hospitals": [
+              {
+                "hospital_id": 1,
+                "name": "Hospital A",
+                "latitude": 51.501,
+                "longitude": -0.13,
+                "distance_m": 111.25784318,
+                "queue_description": "No queue",
+                "cleanliness_note": "Synthetic explicit observation",
+                "latest_report_id": 4,
+                "latest_report_at": "2026-06-01T12:00:00.000Z",
+                "cleanliness_score": 5,
+                "queue_wait_minutes": 10
+              },
+              {
+                "hospital_id": 11,
+                "name": "Hospital K",
+                "latitude": 51.501,
+                "longitude": -0.13,
+                "distance_m": 111.25784318,
+                "queue_description": "No queue",
+                "cleanliness_note": "Synthetic explicit observation",
+                "latest_report_id": 41,
+                "latest_report_at": "2026-06-01T12:00:00.000Z",
+                "cleanliness_score": 5,
+                "queue_wait_minutes": 10
+              },
+              {
+                "hospital_id": 2,
+                "name": "Hospital B",
+                "latitude": 51.503,
+                "longitude": -0.13,
+                "distance_m": 333.77358678,
+                "queue_description": "Under 15 minutes",
+                "cleanliness_note": "Synthetic explicit observation",
+                "latest_report_id": 8,
+                "latest_report_at": "2026-06-01T12:00:00.000Z",
+                "cleanliness_score": 4.5,
+                "queue_wait_minutes": 20
+              },
+              {
+                "hospital_id": 9,
+                "name": "Shared Clinic North",
+                "latitude": 51.504,
+                "longitude": -0.125,
+                "distance_m": 564.43963839,
+                "queue_description": "30-60 minutes",
+                "cleanliness_note": "Synthetic explicit observation",
+                "latest_report_id": 33,
+                "latest_report_at": "2026-06-01T12:00:00.000Z",
+                "cleanliness_score": 4.5,
+                "queue_wait_minutes": 40
+              },
+              {
+                "hospital_id": 10,
+                "name": "Shared Clinic South",
+                "latitude": 51.505,
+                "longitude": -0.125,
+                "distance_m": 655.73954165,
+                "queue_description": "Over 60 minutes",
+                "cleanliness_note": "Synthetic explicit observation",
+                "latest_report_id": 37,
+                "latest_report_at": "2026-06-01T12:00:00.000Z",
+                "cleanliness_score": 4.5,
+                "queue_wait_minutes": 50
+              },
+              {
+                "hospital_id": 3,
+                "name": "Hospital C",
+                "latitude": 51.507,
+                "longitude": -0.13,
+                "distance_m": 778.8053029,
+                "queue_description": "15-30 minutes",
+                "cleanliness_note": "Synthetic explicit observation",
+                "latest_report_id": 12,
+                "latest_report_at": "2026-06-01T12:00:00.000Z",
+                "cleanliness_score": 4,
+                "queue_wait_minutes": 30
+              },
+              {
+                "hospital_id": 4,
+                "name": "Hospital D",
+                "latitude": 51.513,
+                "longitude": -0.13,
+                "distance_m": 1446.35344936,
+                "queue_description": "30-60 minutes",
+                "cleanliness_note": "Synthetic explicit observation",
+                "latest_report_id": 16,
+                "latest_report_at": "2026-06-01T12:00:00.000Z",
+                "cleanliness_score": 3,
+                "queue_wait_minutes": 40
+              }
+            ],
+            "complete": true
+          },
+          "evidence": {
+            "request_id": "779f9cc9-2caa-4ec0-b4a2-71ef534db31f",
+            "data_source": "postgres",
+            "spatial_method": "PostGIS geography WGS84 spheroid",
+            "generated_at": "2026-10-07T10:14:18.914Z",
+            "duration_ms": 0,
+            "time_window": null
+          },
+          "warnings": []
+        }
+      },
+      {
+        "step": 2,
+        "tool": "rank_hospitals",
+        "arguments": {
+          "candidate_ids": [
+            1,
+            11,
+            2,
+            9,
+            10,
+            3,
+            4
+          ],
+          "latitude": 51.5,
+          "longitude": -0.13,
+          "start_time": "2026-05-31T12:00:00+00:00",
+          "end_time": "2026-06-01T12:00:00+00:00",
+          "distance_weight": 0.0,
+          "queue_weight": 1.0,
+          "cleanliness_weight": 0.0,
+          "limit": 3,
+          "radius_m": 2000.0,
+          "min_cleanliness": 4.0
+        },
+        "status": "ok",
+        "result": {
+          "version": "1.0",
+          "tool": "rank_hospitals",
+          "arguments": {
+            "candidate_ids": [
+              1,
+              11,
+              2,
+              9,
+              10,
+              3,
+              4
+            ],
+            "latitude": 51.5,
+            "longitude": -0.13,
+            "start_time": "2026-05-31T12:00:00+00:00",
+            "end_time": "2026-06-01T12:00:00+00:00",
+            "distance_weight": 0,
+            "queue_weight": 1,
+            "cleanliness_weight": 0,
+            "limit": 3,
+            "radius_m": 2000,
+            "min_cleanliness": 4
+          },
+          "data": {
+            "candidate_hospitals": [
+              {
+                "hospital_id": 1,
+                "name": "Hospital A",
+                "latitude": 51.501,
+                "longitude": -0.13,
+                "distance_m": 111.25784318,
+                "queue_description": "No queue",
+                "cleanliness_note": "Synthetic explicit observation",
+                "latest_report_id": 4,
+                "latest_report_at": "2026-06-01T12:00:00.000Z",
+                "cleanliness_score": 5,
+                "queue_wait_minutes": 10
+              },
+              {
+                "hospital_id": 2,
+                "name": "Hospital B",
+                "latitude": 51.503,
+                "longitude": -0.13,
+                "distance_m": 333.77358678,
+                "queue_description": "Under 15 minutes",
+                "cleanliness_note": "Synthetic explicit observation",
+                "latest_report_id": 8,
+                "latest_report_at": "2026-06-01T12:00:00.000Z",
+                "cleanliness_score": 4.5,
+                "queue_wait_minutes": 20
+              },
+              {
+                "hospital_id": 3,
+                "name": "Hospital C",
+                "latitude": 51.507,
+                "longitude": -0.13,
+                "distance_m": 778.8053029,
+                "queue_description": "15-30 minutes",
+                "cleanliness_note": "Synthetic explicit observation",
+                "latest_report_id": 12,
+                "latest_report_at": "2026-06-01T12:00:00.000Z",
+                "cleanliness_score": 4,
+                "queue_wait_minutes": 30
+              },
+              {
+                "hospital_id": 4,
+                "name": "Hospital D",
+                "latitude": 51.513,
+                "longitude": -0.13,
+                "distance_m": 1446.35344936,
+                "queue_description": "30-60 minutes",
+                "cleanliness_note": "Synthetic explicit observation",
+                "latest_report_id": 16,
+                "latest_report_at": "2026-06-01T12:00:00.000Z",
+                "cleanliness_score": 3,
+                "queue_wait_minutes": 40
+              },
+              {
+                "hospital_id": 9,
+                "name": "Shared Clinic North",
+                "latitude": 51.504,
+                "longitude": -0.125,
+                "distance_m": 564.43963839,
+                "queue_description": "30-60 minutes",
+                "cleanliness_note": "Synthetic explicit observation",
+                "latest_report_id": 33,
+                "latest_report_at": "2026-06-01T12:00:00.000Z",
+                "cleanliness_score": 4.5,
+                "queue_wait_minutes": 40
+              },
+              {
+                "hospital_id": 10,
+                "name": "Shared Clinic South",
+                "latitude": 51.505,
+                "longitude": -0.125,
+                "distance_m": 655.73954165,
+                "queue_description": "Over 60 minutes",
+                "cleanliness_note": "Synthetic explicit observation",
+                "latest_report_id": 37,
+                "latest_report_at": "2026-06-01T12:00:00.000Z",
+                "cleanliness_score": 4.5,
+                "queue_wait_minutes": 50
+              },
+              {
+                "hospital_id": 11,
+                "name": "Hospital K",
+                "latitude": 51.501,
+                "longitude": -0.13,
+                "distance_m": 111.25784318,
+                "queue_description": "No queue",
+                "cleanliness_note": "Synthetic explicit observation",
+                "latest_report_id": 41,
+                "latest_report_at": "2026-06-01T12:00:00.000Z",
+                "cleanliness_score": 5,
+                "queue_wait_minutes": 10
+              }
+            ],
+            "hospitals": [
+              {
+                "hospital_id": 11,
+                "name": "Hospital K",
+                "latitude": 51.501,
+                "longitude": -0.13,
+                "distance_m": 111.25784318,
+                "queue_description": "No queue",
+                "cleanliness_note": "Synthetic explicit observation",
+                "latest_report_id": 41,
+                "latest_report_at": "2026-06-01T12:00:00.000Z",
+                "cleanliness_score": 5,
+                "queue_wait_minutes": 10
+              },
+              {
+                "hospital_id": 1,
+                "name": "Hospital A",
+                "latitude": 51.501,
+                "longitude": -0.13,
+                "distance_m": 111.25784318,
+                "queue_description": "No queue",
+                "cleanliness_note": "Synthetic explicit observation",
+                "latest_report_id": 4,
+                "latest_report_at": "2026-06-01T12:00:00.000Z",
+                "cleanliness_score": 5,
+                "queue_wait_minutes": 10
+              },
+              {
+                "hospital_id": 2,
+                "name": "Hospital B",
+                "latitude": 51.503,
+                "longitude": -0.13,
+                "distance_m": 333.77358678,
+                "queue_description": "Under 15 minutes",
+                "cleanliness_note": "Synthetic explicit observation",
+                "latest_report_id": 8,
+                "latest_report_at": "2026-06-01T12:00:00.000Z",
+                "cleanliness_score": 4.5,
+                "queue_wait_minutes": 20
+              }
+            ],
+            "statistics": [
+              {
+                "hospital_id": 1,
+                "report_count": 2,
+                "known_queue_count": 2,
+                "average_queue_severity": 2,
+                "observed_wait_count": 2,
+                "average_wait_minutes": 20,
+                "cleanliness_count": 2,
+                "average_cleanliness": 4.5,
+                "min_cleanliness": 4,
+                "max_cleanliness": 5,
+                "first_report_at": "2026-05-31T12:00:00.000Z",
+                "last_report_at": "2026-06-01T00:00:00.000Z",
+                "first_queue_severity": 3,
+                "last_queue_severity": 1,
+                "report_ids": [
+                  2,
+                  3
+                ],
+                "report_ids_complete": true
+              },
+              {
+                "hospital_id": 2,
+                "report_count": 2,
+                "known_queue_count": 2,
+                "average_queue_severity": 2,
+                "observed_wait_count": 2,
+                "average_wait_minutes": 20,
+                "cleanliness_count": 2,
+                "average_cleanliness": 4.5,
+                "min_cleanliness": 4.5,
+                "max_cleanliness": 4.5,
+                "first_report_at": "2026-05-31T12:00:00.000Z",
+                "last_report_at": "2026-06-01T00:00:00.000Z",
+                "first_queue_severity": 2,
+                "last_queue_severity": 2,
+                "report_ids": [
+                  6,
+                  7
+                ],
+                "report_ids_complete": true
+              },
+              {
+                "hospital_id": 3,
+                "report_count": 2,
+                "known_queue_count": 2,
+                "average_queue_severity": 3,
+                "observed_wait_count": 2,
+                "average_wait_minutes": 30,
+                "cleanliness_count": 2,
+                "average_cleanliness": 4,
+                "min_cleanliness": 4,
+                "max_cleanliness": 4,
+                "first_report_at": "2026-05-31T12:00:00.000Z",
+                "last_report_at": "2026-06-01T00:00:00.000Z",
+                "first_queue_severity": 3,
+                "last_queue_severity": 3,
+                "report_ids": [
+                  10,
+                  11
+                ],
+                "report_ids_complete": true
+              },
+              {
+                "hospital_id": 4,
+                "report_count": 2,
+                "known_queue_count": 2,
+                "average_queue_severity": 4,
+                "observed_wait_count": 2,
+                "average_wait_minutes": 40,
+                "cleanliness_count": 2,
+                "average_cleanliness": 3,
+                "min_cleanliness": 3,
+                "max_cleanliness": 3,
+                "first_report_at": "2026-05-31T12:00:00.000Z",
+                "last_report_at": "2026-06-01T00:00:00.000Z",
+                "first_queue_severity": 4,
+                "last_queue_severity": 4,
+                "report_ids": [
+                  14,
+                  15
+                ],
+                "report_ids_complete": true
+              },
+              {
+                "hospital_id": 9,
+                "report_count": 2,
+                "known_queue_count": 2,
+                "average_queue_severity": 4,
+                "observed_wait_count": 2,
+                "average_wait_minutes": 40,
+                "cleanliness_count": 2,
+                "average_cleanliness": 4.5,
+                "min_cleanliness": 4.5,
+                "max_cleanliness": 4.5,
+                "first_report_at": "2026-05-31T12:00:00.000Z",
+                "last_report_at": "2026-06-01T00:00:00.000Z",
+                "first_queue_severity": 4,
+                "last_queue_severity": 4,
+                "report_ids": [
+                  31,
+                  32
+                ],
+                "report_ids_complete": true
+              },
+              {
+                "hospital_id": 10,
+                "report_count": 2,
+                "known_queue_count": 2,
+                "average_queue_severity": 5,
+                "observed_wait_count": 2,
+                "average_wait_minutes": 50,
+                "cleanliness_count": 2,
+                "average_cleanliness": 4.5,
+                "min_cleanliness": 4.5,
+                "max_cleanliness": 4.5,
+                "first_report_at": "2026-05-31T12:00:00.000Z",
+                "last_report_at": "2026-06-01T00:00:00.000Z",
+                "first_queue_severity": 5,
+                "last_queue_severity": 5,
+                "report_ids": [
+                  35,
+                  36
+                ],
+                "report_ids_complete": true
+              },
+              {
+                "hospital_id": 11,
+                "report_count": 2,
+                "known_queue_count": 2,
+                "average_queue_severity": 1,
+                "observed_wait_count": 2,
+                "average_wait_minutes": 10,
+                "cleanliness_count": 2,
+                "average_cleanliness": 5,
+                "min_cleanliness": 5,
+                "max_cleanliness": 5,
+                "first_report_at": "2026-05-31T12:00:00.000Z",
+                "last_report_at": "2026-06-01T00:00:00.000Z",
+                "first_queue_severity": 1,
+                "last_queue_severity": 1,
+                "report_ids": [
+                  39,
+                  40
+                ],
+                "report_ids_complete": true
+              }
+            ],
+            "ranking": [
+              {
+                "hospital_id": 11,
+                "score": 0,
+                "rank": 1
+              },
+              {
+                "hospital_id": 1,
+                "score": 0.25,
+                "rank": 2
+              },
+              {
+                "hospital_id": 2,
+                "score": 0.25,
+                "rank": 3
+              }
+            ],
+            "excluded_ids": [
+              4
+            ],
+            "algorithm": "weighted-cost-v1",
+            "distance_scale_m": 2000
+          },
+          "evidence": {
+            "request_id": "9f772478-ff32-4afe-b6b2-fb2f3338c049",
+            "data_source": "postgres",
+            "spatial_method": "PostGIS geography WGS84 spheroid",
+            "generated_at": "2026-10-07T10:14:19.076Z",
+            "duration_ms": 2,
+            "time_window": {
+              "start": "2026-05-31T12:00:00.000Z",
+              "end": "2026-06-01T12:00:00.000Z",
+              "end_exclusive": true
+            }
+          },
+          "warnings": []
+        }
+      }
+    ],
+    "provider": "rules",
+    "warnings": [
+      "规则规划演示，未调用 LLM。"
+    ],
+    "usage": {
+      "prompt_tokens": 0,
+      "completion_tokens": 0
+    }
+  }
+}

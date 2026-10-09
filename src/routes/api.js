@@ -4,8 +4,8 @@ const express = require("express");
 const { toFeatureCollection } = require("../utils/geo");
 
 function parsePositiveInteger(value, fallback) {
-  const parsed = Number.parseInt(value, 10);
-  return Number.isInteger(parsed) && parsed > 0 ? parsed : fallback;
+  const parsed = typeof value === "number" || /^\d+$/.test(String(value)) ? Number(value) : NaN;
+  return Number.isSafeInteger(parsed) && parsed > 0 && parsed <= 2147483647 ? parsed : fallback;
 }
 
 function requireFields(body, fields) {
@@ -35,6 +35,7 @@ function asyncRoute(handler) {
 }
 
 function requireNonBlank(value, label) {
+  if (typeof value !== "string") { const error = new Error(`${label} must be text`); error.status = 400; throw error; }
   const text = String(value).trim();
   if (!text) {
     const error = new Error(`${label} cannot be blank`);
@@ -42,6 +43,15 @@ function requireNonBlank(value, label) {
     throw error;
   }
   return text;
+}
+
+function validateReportMetrics(body) {
+  for (const [key,min,max] of [["cleanlinessScore",1,5],["queueWaitMinutes",0,1440]]) {
+    const value=body[key];
+    if(value!==undefined && value!==null && (typeof value!=="number" || !Number.isFinite(value) || value<min || value>max)) {
+      const error=new Error(`${key} must be a number between ${min} and ${max}`);error.status=400;throw error;
+    }
+  }
 }
 
 function createApiRouter(store, demoUserId) {
@@ -68,6 +78,7 @@ function createApiRouter(store, demoUserId) {
   }));
 
   router.get("/hospitals/nearest", asyncRoute(async (req, res) => {
+    requireFields(req.query, ["lat", "lon"]);
     const latitude = Number(req.query.lat);
     const longitude = Number(req.query.lon);
     validateCoordinates(latitude, longitude);
@@ -102,6 +113,9 @@ function createApiRouter(store, demoUserId) {
     const latitude = Number(req.body.latitude);
     const longitude = Number(req.body.longitude);
     validateCoordinates(latitude, longitude);
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(req.body.lastInspected) || !Number.isFinite(Date.parse(req.body.lastInspected))) {
+      return res.status(400).json({error:"lastInspected must be an ISO date"});
+    }
     const hospital = await store.insertHospital({
       name: requireNonBlank(req.body.name, "Hospital name"),
       lastInspected: req.body.lastInspected,
@@ -114,10 +128,14 @@ function createApiRouter(store, demoUserId) {
 
   router.post("/reports", asyncRoute(async (req, res) => {
     requireFields(req.body, ["hospitalId", "queueLengthId", "cleanliness", "userId"]);
+    validateReportMetrics(req.body);
+    if(typeof req.body.cleanliness === "string" && req.body.cleanliness.length>500) return res.status(400).json({error:"Cleanliness observation exceeds 500 characters"});
     const result = await store.insertReport({
       hospitalId: parsePositiveInteger(req.body.hospitalId, 0),
       queueLengthId: parsePositiveInteger(req.body.queueLengthId, 0),
       cleanliness: requireNonBlank(req.body.cleanliness, "Cleanliness observation"),
+      cleanlinessScore: req.body.cleanlinessScore ?? null,
+      queueWaitMinutes: req.body.queueWaitMinutes ?? null,
       userId: parsePositiveInteger(req.body.userId, demoUserId)
     });
     res.status(201).json(result);

@@ -1,0 +1,24 @@
+# Optional overlay: docker compose -f docker-compose.yml -f docker-compose.agent.yml --profile agent up --build
+services:
+  app:
+    environment:
+      AGENT_SERVICE_URL: http://agent:8000
+      AGENT_API_TOKEN: ${AGENT_API_TOKEN:-}
+      GIS_TOOLS_TOKEN: ${GIS_TOOLS_TOKEN:-}
+  agent:
+    profiles: [agent]
+    build:
+      context: .
+      dockerfile: agent-service/Dockerfile
+    environment:
+      GIS_API_URL: http://app:3000
+      GIS_TOOLS_TOKEN: ${GIS_TOOLS_TOKEN:-}
+      AGENT_API_TOKEN: ${AGENT_API_TOKEN:-}
+      PLANNER_PROVIDER: ${PLANNER_PROVIDER:-http_chat}
+      LLM_BASE_URL: ${LLM_BASE_URL:-}
+      LLM_MODEL: ${LLM_MODEL:-}
+      LLM_API_KEY: ${LLM_API_KEY:-}
+      EVAL_MODE: "false"
+    depends_on:
+      app:
+        condition: service_started
