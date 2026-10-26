@@ -4,8 +4,6 @@ const path = require("path");
 const express = require("express");
 const helmet = require("helmet");
 const { createApiRouter } = require("./routes/api");
-const { createToolsRouter } = require("./routes/tools");
-const { createAgentRouter } = require("./routes/agent");
 
 function createApp({ store, demoUserId = 1 }) {
   const app = express();
@@ -20,8 +18,6 @@ function createApp({ store, demoUserId = 1 }) {
   );
   app.use(express.json({ limit: "100kb" }));
   app.use("/api", createApiRouter(store, demoUserId));
-  app.use("/api/tools", createToolsRouter(store));
-  app.use("/api/agent", createAgentRouter());
   app.use(express.static(publicDirectory, { extensions: ["html"] }));
 
   app.use((req, res) => {

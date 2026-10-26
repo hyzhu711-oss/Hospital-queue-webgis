@@ -6,10 +6,3 @@ npm-debug.log
 coverage
 docs
 tests
-.venv
-.tools
-**/__pycache__
-**/.pytest_cache
-**/.env
-**/.env.*
-eval/reports
